@@ -21,14 +21,14 @@ public:
 
 protected:
   friend class FT81xDisplay;
-  FT81xGuiComponent(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp) { myReg = reg; myCmd = cmd; myDisp = disp; mHide = false; };
+  FT81xGfxComponent(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp) { myReg = reg; myCmd = cmd; myDisp = disp; mHide = false; };
   bool isHide() { return mHide; };
 
 protected:
   FT81xDisplay *myDisp;
   RegisterOperation *myReg;
   CommandOperation *myCmd;
-  mHide;
+  bool mHide;
 };
 
 #endif // FT81GFXCOMPOENENTS_HEADER_GUARD

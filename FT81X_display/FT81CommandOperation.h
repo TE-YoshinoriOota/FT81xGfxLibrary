@@ -1,8 +1,9 @@
 #ifndef FT81COMMANDOPERATION_HEADER_GUARD
 #define FT81COMMANDOPERATION_HEADER_GUARD
 
-#include "FT81GfxCore.h"
-
+#include "FT81Core.h"
+#include <SPI.h>
+#include "FT81RegisterOperation.h"
 
 /********************************************/
 /*  CommandOperation class                  */

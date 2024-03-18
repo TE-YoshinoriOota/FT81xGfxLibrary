@@ -1,5 +1,7 @@
 #include "FT81GuiToggle.h"
-
+class FT81xDisplay;
+class RegisterOperation;
+class CommandOperation;
 
 /********************************************/
 /*  FT81xGuiToggle Class                    */

@@ -1,10 +1,8 @@
 #ifndef FT81GFXCIRCLE_HEADER_GUARD
 #define FT81GFXCIRCLE_HEADER_GUARD
 
-#include "FT81GfxComponents.h"
-#include "FT81RegisterOperation.h"
-#include "FT81CommandOperation.h"
-#include "FT81Display.h"
+#include "FT81GfxComponent.h"
+
 
 /********************************************/
 /*  FT81xGfxCircle Class                    */

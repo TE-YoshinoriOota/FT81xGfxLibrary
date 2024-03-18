@@ -79,5 +79,33 @@
 #define QVGA_FT_DispCSpread  1
 #define QVGA_FT_DispDither   1
 
+enum FT81Components {
+   FT81xCircle
+  ,FT81xRectangle
+  ,FT81xTriangle
+  ,FT81xLine
+  ,FT81xGradient
+  ,FT81xClock
+  ,FT81xText
+  ,FT81xSpinner
+  ,FT81xGauge
+  ,FT81xProgressbar
+  ,FT81xMovie
+  ,FT81xButton
+  ,FT81xScrollbar
+  ,FT81xSlider
+  ,FT81xDial
+  ,FT81xToggle
+  ,FT81xKeys
+  ,FT81xImage
+  ,FT81xAudio
+  ,FT81xSynth
+};
+
+extern uint32_t SPI_FREQ_LAUNCH;
+extern uint32_t SPI_FREQ_RUNING;
+extern uint8_t  CS_PIN;
+extern uint8_t  PDN_PIN;
+
 #endif // FT81GFXCORE_HEADER_GUARD
 

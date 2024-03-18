@@ -4,29 +4,6 @@
 
 #include "FT81Core.h"
 
-enum GuiComponents {
-   FT81xCircle
-  ,FT81xRectangle
-  ,FT81xTriangle
-  ,FT81xLine
-  ,FT81xGradient
-  ,FT81xClock
-  ,FT81xText
-  ,FT81xSpinner
-  ,FT81xGauge
-  ,FT81xProgressbar
-  ,FT81xMovie
-  ,FT81xButton
-  ,FT81xScrollbar
-  ,FT81xSlider
-  ,FT81xDial
-  ,FT81xToggle
-  ,FT81xKeys
-  ,FT81xImage
-  ,FT81xAudio
-  ,FT81xSynth
-};
-
 
 /********************************************/
 /*  FT81xComponent Class                 */

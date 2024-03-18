@@ -1,8 +1,8 @@
 #include "FT81Display.h"
 
 
-static uint32_t SPI_FREQ_LAUNCH = SPI5_FREQ_LAUNCH;
-static uint32_t SPI_FREQ_RUNING = SPI5_FREQ_RUNING;
+static uint32_t SPI_FREQ_LAUNCH = SPI4_FREQ_LAUNCH;
+static uint32_t SPI_FREQ_RUNING = SPI4_FREQ_RUNING;
 static uint8_t CS_PIN = SPI1_CS_PIN;
 static uint8_t PDN_PIN = SPI1_PDN_PIN;
 

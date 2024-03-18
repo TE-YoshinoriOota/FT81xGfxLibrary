@@ -1,4 +1,4 @@
-#include "FT81GfxCore.h"
+#include "FT81Core.h"
 #include "FT81CommandOperation.h"
 
 
