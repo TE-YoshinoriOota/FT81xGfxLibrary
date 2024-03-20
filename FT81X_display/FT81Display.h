@@ -7,6 +7,9 @@
 #include "FT81MemoryOperation.h"
 #include "FT81MediaOperation.h"
 #include "FT81GfxComponent.h"
+#include "FT81GuiComponent.h"
+#include "FT81MediaComponent.h"
+
 #include "FT81GfxCircle.h"
 #include "FT81GfxRectangle.h"
 #include "FT81GfxTriangle.h"
@@ -17,14 +20,14 @@
 #include "FT81GfxProgressbar.h"
 #include "FT81GfxSpinner.h"
 #include "FT81GfxGauge.h"
-#include "FT81GuiComponent.h"
+
 #include "FT81GuiButton.h"
 #include "FT81GuiDial.h"
 #include "FT81GuiKeys.h"
 #include "FT81GuiScrollbar.h"
 #include "FT81GuiSlider.h"
 #include "FT81GuiToggle.h"
-#include "FT81MediaComponent.h"
+
 #include "FT81MediaAudio.h"
 #include "FT81MediaImage.h"
 #include "FT81MediaMovie.h"
@@ -82,7 +85,7 @@ public:
   uint32_t getBgColor() { return m_bgcolor;  }
 
 public:
-  FT81xGuiComponent* Create(enum GuiComponents elem);
+  FT81xComponent* Create(enum FT81xComponents elem);
 
 protected:
   friend class FT81xGuiComponent;

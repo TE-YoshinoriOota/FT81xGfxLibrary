@@ -13,11 +13,11 @@ class FT81xComponent {
 public:
   virtual ~FT81xComponent() {};
   FT81xComponent() { mUid = random(0,0xffffffff); }
-  enum FT81Components type() { return mType; }
+  enum FT81xComponents type() { return mType; }
   uint32_t getUid() { return mUid; }
 
 protected:
-  enum FT81Components mType;
+  enum FT81xComponents mType;
 
 private:
   uint32_t mUid;

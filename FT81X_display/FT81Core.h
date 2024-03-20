@@ -79,7 +79,7 @@
 #define QVGA_FT_DispCSpread  1
 #define QVGA_FT_DispDither   1
 
-enum FT81Components {
+enum FT81xComponents {
    FT81xCircle
   ,FT81xRectangle
   ,FT81xTriangle

@@ -4,9 +4,10 @@
 
 #include "FT81GfxComponent.h"
 
+class FT81xDisplay;
 
 /********************************************/
-/*  FT81xGuiCompoennt Class         */
+/*  FT81xGuiCompoennt Class                 */
 /********************************************/
 
 class FT81xGuiComponent : public FT81xGfxComponent {

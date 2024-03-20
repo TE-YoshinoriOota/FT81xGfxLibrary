@@ -1,5 +1,5 @@
 #include "FT81Display.h"
-
+#include <Flash.h>
 
 static uint32_t SPI_FREQ_LAUNCH = SPI4_FREQ_LAUNCH;
 static uint32_t SPI_FREQ_RUNING = SPI4_FREQ_RUNING;
@@ -193,7 +193,7 @@ void FT81xDisplay::clear(const uint8_t r, const uint8_t g, const uint8_t b) {
   myCmd->cmd_end();  
 }
 
-FT81xGuiComponent* FT81xDisplay::Create(enum GuiComponents elem) {
+FT81xGuiComponent* FT81xDisplay::Create(enum FT81xComponents elem) {
   uint32_t uid = 0;
   switch(elem) {
   case FT81xCircle:

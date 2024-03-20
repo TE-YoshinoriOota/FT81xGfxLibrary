@@ -6,7 +6,7 @@
 /********************************************/  
 
 FT81xGuiComponent::FT81xGuiComponent(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp)
- : FT81xGuiComponent(reg, cmd, disp) {
+ : FT81xGfxComponent(reg, cmd, disp) {
   mTag = 0;
   m_func = NULL;
 }

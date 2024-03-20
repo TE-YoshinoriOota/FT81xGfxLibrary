@@ -3,7 +3,7 @@
 
 
 #include "FT81GuiComponent.h"
-
+#include "FT81Display.h"
 
 /********************************************/
 /*  FT81xGuiToggle Class                    */

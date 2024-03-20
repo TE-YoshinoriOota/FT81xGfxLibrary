@@ -9,6 +9,7 @@
 #include "FT81Display.h"
 
 
+
 /********************************************/
 /*  FT81xGfxComponent Class                 */
 /********************************************/
@@ -21,7 +22,7 @@ public:
 
 protected:
   friend class FT81xDisplay;
-  FT81xGfxComponent(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp) { myReg = reg; myCmd = cmd; myDisp = disp; mHide = false; };
+  FT81xGfxComponent(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp);
   bool isHide() { return mHide; };
 
 protected:
