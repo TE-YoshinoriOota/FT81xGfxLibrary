@@ -2,11 +2,40 @@
 #include <SDHCI.h>
 SDClass SD;
 
+#include "FT81xDisplay.h"
+#include "FT81xGuiComponent.h"
+#include "FT81xGfxCircle.h"
+#include "FT81xGfxRectangle.h"
+#include "FT81xGfxTriangle.h"
+#include "FT81xGfxLine.h"
+#include "FT81xGfxGradient.h"
+#include "FT81xGfxText.h"
+#include "FT81xComponentGauge.h"
+#include "FT81xComponentClock.h"
+#include "FT81xComponentProgressbar.h"
+#include "FT81xComponentSpinner.h"
+
+#include "FT81xInteractionComponent.h"
+#include "FT81xInteractionButton.h"
+#include "FT81xInteractionKeys.h"
+#include "FT81xInteractionDial.h"
+#include "FT81xInteractionSlider.h"
+#include "FT81xInteractionToggle.h"
+#include "FT81xInteractionScrollbar.h"
+
+#include "FT81xMediaComponent.h"
+#include "FT81xMediaImage.h"
+#include "FT81xMediaSynth.h"
+#include "FT81xMediaAudio.h"
+#include "FT81xMediaMovie.h"
+
 uint8_t g_button_pushed = 0;
 uint8_t g_button_id = 0;
 
 uint8_t g_key_pushed = 0;
 String g_key_strings;
+
+
 
 void setup() {
   pinMode(21, OUTPUT);
@@ -107,16 +136,16 @@ void setup() {
   clock->setSize(50);
   clock->draw();
 
-  // Guage Test
-  FT81xComponentGuage* guage = (FT81xComponentGuage*)display->Create(FT81xGuage);
-  guage->setMeter(6, 4, 60);
-  guage->setValue(0);
-  guage->setColor(255, 255, 255);
-  guage->setBgColor(20, 20, 20);
-  guage->setNeedleColor(255, 128, 128);
-  guage->setPosition(500, 300);
-  guage->setSize(60);
-  guage->draw();
+  // Gauge Test
+  FT81xComponentGauge* Gauge = (FT81xComponentGauge*)display->Create(FT81xGauge);
+  Gauge->setMeter(6, 4, 60);
+  Gauge->setValue(0);
+  Gauge->setColor(255, 255, 255);
+  Gauge->setBgColor(20, 20, 20);
+  Gauge->setNeedleColor(255, 128, 128);
+  Gauge->setPosition(500, 300);
+  Gauge->setSize(60);
+  Gauge->draw();
 
   // Progressbar Test
   FT81xComponentProgressbar* progress = (FT81xComponentProgressbar*)display->Create(FT81xProgressbar);
@@ -157,7 +186,7 @@ void setup() {
     }
     text1->draw(buf);
     clock->draw(10, 10, n);
-    guage->draw(n);
+    Gauge->draw(n);
     progress->draw(n);
 
     display->swap();
@@ -178,7 +207,7 @@ void setup() {
   // delete text0; text0 = NULL;
   // delete text1; text1 = NULL; // reuse text1 below procedures
   delete clock; clock = NULL;
-  delete guage; guage = NULL;
+  delete Gauge; Gauge = NULL;
 
   // Spinner Test
   FT81xComponentSpinner* spinner = (FT81xComponentSpinner*)display->Create(FT81xSpinner);
@@ -625,7 +654,7 @@ void setup() {
 
   // Test Motion Jpeg
   Serial.println("Motion Jpeg Test");
-  FT81xMediaMJpeg *movie = (FT81xMediaMJpeg*)display->Create(FT81xMJpeg);
+  FT81xMediaMovie *movie = (FT81xMediaMovie*)display->Create(FT81xMovie);
   movie->setupMemory(0);
   //movie->setFullscreen();
   movie->enableSound();
@@ -661,7 +690,7 @@ void setup() {
   while (movie_size > 0) {
     int read_size = myMovie.read(movie_buf, movie_buf_size);
     if (read_size > 0) {
-      movie->setMJpeg(movie_buf, read_size);
+      movie->setMovie(movie_buf, read_size);
       movie_size -= read_size;
     } else {
       Serial.println("End of file");

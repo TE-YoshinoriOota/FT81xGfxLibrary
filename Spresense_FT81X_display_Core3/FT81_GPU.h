@@ -15,7 +15,7 @@
 #define LOW_FREQ_BOUND  58800000L//98% of 60Mhz
 
 #define RAM_G_SIZE			1024*1024L
-#define FT81X_VERSION "1.0.4"
+#define FT81X_VERSION   "1.0.4"
 
 #define ADC_DIFFERENTIAL     1UL
 #define ADC_SINGLE_ENDED     0UL
