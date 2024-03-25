@@ -54,10 +54,10 @@ class FT81xDisplay {
 public:
   static FT81xDisplay* Instance(enum SPI_CHANNEL spi_ch);
   void begin(enum DisplaySize disp);
-  void startDisplayList();
+  void readyCanvas();
   void clear(const uint8_t r, const uint8_t g, const uint8_t b);
   bool senseInteractionComponents();
-  void swap();
+  void updateCanvas();
 
   uint16_t getDisplayWidth() { return mDispProp.FT_DispWidth; }
   uint16_t getDisplayHeight() { return mDispProp.FT_DispHeight; }

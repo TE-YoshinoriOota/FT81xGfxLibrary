@@ -48,7 +48,7 @@ void setup() {
   display->begin(DISPLAY_RESOLUTION_WVGA);
 
 
-  display->startDisplayList();
+  display->readyCanvas();
   display->clear(255, 255, 255);
 
   // circle test
@@ -158,13 +158,13 @@ void setup() {
   progress->draw();
 
   // display
-  display->swap();
+  display->updateCanvas();
 
   delay(2000);
 
 #if 1
   for (int n = 0; n <= 10; ++n) {
-    display->startDisplayList();
+    display->readyCanvas();
     display->clear(255, 255, 255);
 
     circle0->draw();
@@ -189,7 +189,7 @@ void setup() {
     Gauge->draw(n);
     progress->draw(n);
 
-    display->swap();
+    display->updateCanvas();
     delay(1000);
   }
 
@@ -219,55 +219,55 @@ void setup() {
   text1->setColor(100, 100, 100);
   text1->setPosition(320, 80);
 
-  display->startDisplayList();
+  display->readyCanvas();
   display->clear(255, 255, 255);
   text1->draw("Circle Style"); // Text should be first
   spinner->draw();
-  display->swap();
+  display->updateCanvas();
   delay(3000);
 
-  display->startDisplayList();
+  display->readyCanvas();
   display->clear(255, 255, 255);
   text1->draw("Clock Style"); // Text should be first
   spinner->setClockStyle();
   spinner->draw();
-  display->swap();
+  display->updateCanvas();
   delay(3000);
 
-  display->startDisplayList();
+  display->readyCanvas();
   display->clear(255, 255, 255);
   text1->draw("Line Style"); // Text should be first
   spinner->setLineStyle();
   spinner->draw();
-  display->swap();
+  display->updateCanvas();
   delay(3000);
 
-  display->startDisplayList();
+  display->readyCanvas();
   display->clear(255, 255, 255);
   text1->draw("Dot Style"); // Text should be first
   spinner->setDotStyle();
   spinner->draw();
-  display->swap();
+  display->updateCanvas();
   delay(3000);
 
   delete spinner; spinner = NULL;
 
 
   // Touch Test
-  display->startDisplayList();
+  display->readyCanvas();
   display->clear(255, 255, 255);  
   display->forceTouchCalibration();
   //display->doTouchCalibration();
   
   uint16_t x, y;
   uint16_t num = 0;
-  display->startDisplayList();
+  display->readyCanvas();
   display->clear(255, 255, 255);  
   text1->setText("Touch Display");  
   text1->draw();  
-  display->swap();
+  display->updateCanvas();
   while (num < 10) {
-    display->startDisplayList();
+    display->readyCanvas();
     if (display->isTouched(&x, &y)) {
       Serial.println("x = " + String(x) + " y = " + String(y));
       String xy = "(" + String(x) + ", " + String(y) + ")";
@@ -278,7 +278,7 @@ void setup() {
     display->clear(255, 255, 255);  
     text1->draw();  
     circle1->draw();
-    display->swap();
+    display->updateCanvas();
   }
 
   // Interaction Button Test
@@ -304,7 +304,7 @@ void setup() {
   text1->setText("Touch buttons");
   num = 0;
   while (num < 10) {
-    display->startDisplayList();
+    display->readyCanvas();
     display->clear(255, 255, 255);    
     display->senseInteractionComponents();
     if (button0->pushed()) {
@@ -318,7 +318,7 @@ void setup() {
     button0->draw();
     button1->draw();
     text1->draw();
-    display->swap();
+    display->updateCanvas();
     delay(100);
   }
 
@@ -341,7 +341,7 @@ void setup() {
   num = 0;
   String input;
   while (num < 10) {
-    display->startDisplayList();
+    display->readyCanvas();
     display->clear(255, 255, 255);    
     display->senseInteractionComponents();
     char value = keys->readKey();
@@ -352,7 +352,7 @@ void setup() {
     }
     text1->draw();
     keys->draw();
-    display->swap();
+    display->updateCanvas();
     delay(150);
   }
 
@@ -397,7 +397,7 @@ void setup() {
   uint16_t d_value = 0;
   uint16_t s_value = 0;
   while (d_value < 90) {
-    display->startDisplayList();
+    display->readyCanvas();
     bool ret = display->senseInteractionComponents();
     if (ret) {
       d_value = dial->readValue();
@@ -415,7 +415,7 @@ void setup() {
     dial->draw();
     slider->draw();
     toggle->draw();
-    display->swap();
+    display->updateCanvas();
     delay(30);
   }
 
@@ -453,7 +453,7 @@ void setup() {
   text0->setText("move scrollbar");
   text1->setText("scrollbar values");  
   while (x_value < 100) {
-    display->startDisplayList();
+    display->readyCanvas();
     bool ret = display->senseInteractionComponents();
     if (ret) {
       x_value = scroll0->readValue();
@@ -473,7 +473,7 @@ void setup() {
     text0->draw();
     scroll0->draw();
     scroll1->draw();
-    display->swap();
+    display->updateCanvas();
     delay(30);
   }
 #endif
@@ -505,10 +505,10 @@ void setup() {
     dx += 2;
     if (dy <= goal_y) dy += 1;
     image->setPosition(dx, dy);
-    display->startDisplayList();
+    display->readyCanvas();
     display->clear(255, 255, 255);
     image->draw();
-    display->swap();
+    display->updateCanvas();
     delay(10);
   }
   // rotation test
@@ -516,10 +516,10 @@ void setup() {
   while (dr <= 360) {
     ++dr;
     image->setRotation(dr);
-    display->startDisplayList();
+    display->readyCanvas();
     display->clear(255, 255, 255);
     image->draw();
-    display->swap();
+    display->updateCanvas();
     delay(10);
   }
 
@@ -537,11 +537,11 @@ void setup() {
     String str = "Playing BELL (" + String(note) + ")";
     text0->setText(str.c_str());
     synth->setNote(note);
-    display->startDisplayList();
+    display->readyCanvas();
     display->clear(255, 255, 255);   
     synth->play();
     text0->draw();
-    display->swap();
+    display->updateCanvas();
     delay(1000);
   }
   synth->stop();
@@ -551,11 +551,11 @@ void setup() {
     String str = "Playing XYLOPHONE (" + String(note) + ")";
     text0->setText(str.c_str());
     synth->setNote(note);
-    display->startDisplayList();
+    display->readyCanvas();
     display->clear(255, 255, 255);   
     synth->play();
     text0->draw();
-    display->swap();
+    display->updateCanvas();
     delay(1000);
   }
   synth->stop();
@@ -564,11 +564,11 @@ void setup() {
     String str = "Playing WARBLE (" + String(note) + ")";
     text0->setText(str.c_str());
     synth->setNote(note);
-    display->startDisplayList();
+    display->readyCanvas();
     display->clear(255, 255, 255);   
     synth->play();
     text0->draw();
-    display->swap();
+    display->updateCanvas();
     delay(1000);
   }
   synth->stop();
@@ -595,11 +595,11 @@ void setup() {
   String audioStr = "Playing LINEAR audio : no loop";
   text0->setText(audioStr.c_str());
 
-  display->startDisplayList();
+  display->readyCanvas();
   display->clear(255, 255, 255); 
   text0->draw();
   audio->play();
-  display->swap();
+  display->updateCanvas();
   delay(5000);
   audio->stop();
 
@@ -618,11 +618,11 @@ void setup() {
   audioStr = "Playing ULAW audio : loop";
   text0->setText(audioStr.c_str());
 
-  display->startDisplayList();
+  display->readyCanvas();
   display->clear(255, 255, 255); 
   text0->draw();
   audio->play();
-  display->swap();
+  display->updateCanvas();
   delay(5000);
   audio->stop();
 
@@ -641,11 +641,11 @@ void setup() {
   audioStr = "Playing ADPCM audio : no loop";
   text0->setText(audioStr.c_str());
 
-  display->startDisplayList();
+  display->readyCanvas();
   display->clear(255, 255, 255); 
   text0->draw();
   audio->play();
-  display->swap();
+  display->updateCanvas();
   delay(5000);
   audio->stop();
 
@@ -722,11 +722,11 @@ void setup() {
   text0->setColor(255, 255, 255);
   text0->setText("Congrats! all tests have passed!");
 
-  display->startDisplayList();
+  display->readyCanvas();
   display->clear(255, 255, 255);
   grad0->draw();
   text0->draw();
-  display->swap();
+  display->updateCanvas();
 
   delete grad0;
   delete text0;

@@ -205,7 +205,7 @@ void FT81xDisplay::begin(enum DisplaySize disp) {
   delay(100);  
 }
 
-void FT81xDisplay::startDisplayList() {
+void FT81xDisplay::readyCanvas() {
   myCmd->cmd_start();
   myCmd->cmd(CMD_DLSTART);
   myCmd->cmd(CLEAR(1, 1, 1));
@@ -317,7 +317,7 @@ bool FT81xDisplay::senseInteractionComponents() {
   return true;
 }
 
-void FT81xDisplay::swap() {
+void FT81xDisplay::updateCanvas() {
   myCmd->cmd_start();
   myCmd->cmd(END_DL());
   myCmd->cmd(SWAP());  
