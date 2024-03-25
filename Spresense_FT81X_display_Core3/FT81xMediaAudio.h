@@ -17,7 +17,6 @@ class FT81xDisplay;
 class FT81xMediaAudio : public FT81xMediaComponent {
 public:
   virtual ~FT81xMediaAudio();
-  virtual void draw();
   virtual void setupMemory(uint32_t addr);
   void play();
   void stop();  

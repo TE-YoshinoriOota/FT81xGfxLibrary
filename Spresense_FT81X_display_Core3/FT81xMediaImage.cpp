@@ -7,22 +7,25 @@
 /********************************************/
 
 FT81xMediaImage::~FT81xMediaImage() {
-  // myDisp->releaseHandle(mHandle);
+  mVisible = false;
+  myDisp->releaseGfxComponent(mId);
 }
 
 FT81xMediaImage::FT81xMediaImage(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp,  MediaOperation *mem, const uint32_t chunk) 
  : FT81xMediaComponent(reg, cmd, disp, mem, chunk)  {
+  mType = FT81xImage;
   mAddress = 0;
-  mHandle = 0;
   m_x = m_y = 0;
   m_w = m_h = 0;
   m_scale = 1;
   m_rot = 0;
+  mVisible = true;
+  myDisp->addGfxComponent(mId, this);
 } 
 
 void FT81xMediaImage::draw() {
   myCmd->cmd_start();
-  myCmd->cmd(BITMAP_HANDLE(mHandle));
+  myCmd->cmd(BITMAP_HANDLE(mId));
   myCmd->cmd(BITMAP_SOURCE(RAM_G + mAddress));
   myCmd->cmd(BITMAP_LAYOUT(RGB565, m_w*2, m_h));
   myCmd->cmd(BITMAP_SIZE(NEAREST, BORDER, BORDER, m_w, m_h));
@@ -40,7 +43,7 @@ void FT81xMediaImage::draw() {
   myCmd->cmd(65536*(-m_w/2));
   myCmd->cmd(65536*(-m_h/2));
   myCmd->cmd(CMD_SETMATRIX);
-  myCmd->cmd(VERTEX2II(m_x, m_y, mHandle, 0));
+  myCmd->cmd(VERTEX2II(m_x, m_y, mId, 0));
   myCmd->cmd(DISPLAY());
   myCmd->cmd(END());
   myCmd->cmd_end();

@@ -12,6 +12,7 @@ FT81xGuiSlider::~FT81xGuiSlider() {
 
 FT81xGuiSlider::FT81xGuiSlider(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp)
  : FT81xGuiComponent(reg, cmd, disp) {
+  mType = FT81xSlider;
   m_x = m_y = 0;
   m_w = m_h = 0;
   m_color = COLOR_RGB(255, 255, 255);

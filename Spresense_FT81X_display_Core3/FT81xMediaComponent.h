@@ -12,10 +12,9 @@ FT81xDisplay;
 /*  FT81xMediaCompoennt Class               */
 /********************************************/
 
-class FT81xMediaComponent : public FT81xGfxComponent {
+class FT81xMediaComponent : public FT81xComponent {
 public:
   virtual ~FT81xMediaComponent();
-  virtual void draw() = 0;
   virtual void setupMemory(uint32_t addr) = 0;
   uint32_t getChunkSize() { return mChunk; }
   uint8_t* getTransBuf() { return mTransBuf; }
@@ -25,7 +24,10 @@ protected:
   FT81xMediaComponent(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp, MediaOperation *mem, const uint32_t chunk);
  
 protected:
-  MediaOperation* myMem;
+  MediaOperation *myMem;
+  RegisterOperation *myReg;
+  CommandOperation *myCmd;
+  FT81xDisplay *myDisp;
 
 private:
   uint32_t mChunk;

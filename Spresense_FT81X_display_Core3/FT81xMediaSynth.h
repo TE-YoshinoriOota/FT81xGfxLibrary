@@ -165,7 +165,6 @@ class FT81xDisplay;
 class FT81xMediaSynth : public FT81xMediaComponent {
 public:
   virtual ~FT81xMediaSynth() {}
-  virtual void draw();
   virtual void setupMemory(uint32_t addr) { /* no need */};
   void play();
   void stop();  

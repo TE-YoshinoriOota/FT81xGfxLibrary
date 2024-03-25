@@ -7,13 +7,10 @@
 
 FT81xMediaSynth::FT81xMediaSynth(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp, MediaOperation *mem, const uint32_t chunk)
  : FT81xMediaComponent(reg, cmd, disp, mem, chunk)  {
+  mType = FT81xSynth;
   m_volume = 128;
   m_note = NOTE_C1;
   m_effect = BEEP;
-}
- 
-void FT81xMediaSynth::draw() {
- this->play();
 }
 
 void FT81xMediaSynth::play() {

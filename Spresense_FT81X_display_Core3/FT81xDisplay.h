@@ -6,12 +6,11 @@
 #include "RegisterOperation.h"
 #include "CommandOperation.h"
 #include "MediaOperation.h"
+#include "FT81xComponent.h"
 #include "FT81xGfxComponent.h"
 #include "FT81xGuiComponent.h"
-#include "FT81Core.h"
+#include "FT81xCore.h"
 
-class FT81xGfxComponent;
-class FT81xGuiComponent;
 
 /********************************************/
 /*  FT81xDisplay Class                      */
@@ -58,18 +57,16 @@ public:
   void clear(const uint8_t r, const uint8_t g, const uint8_t b);
   bool senseGuiComponents();
   void updateCanvas();
+  void swap();
 
   uint16_t getDisplayWidth() { return mDispProp.FT_DispWidth; }
   uint16_t getDisplayHeight() { return mDispProp.FT_DispHeight; }
   uint32_t getBgColor() { return m_bgcolor;  }
 
 public:
-  FT81xGfxComponent* Create(enum FT81xComponents elem);
+  FT81xComponent* Create(enum FT81xComponents elem);
+  void Destroy(FT81xComponent *elem);
 
-protected:
-  friend class FT81xGuiComponent;
-  void setTag(const uint8_t t, FT81xGuiComponent *elem);
-  void releaseTag(const uint8_t t);
 
 public:
   bool doTouchCalibration();
@@ -81,6 +78,18 @@ public:
   bool isTouched(uint16_t *x, uint16_t *y);
 
   void setTouchSensitivity(uint16_t sensitivity);
+
+protected:
+  friend class FT81xGfxComponent;
+  friend class FT81xMediaImage;
+  void addGfxComponent(uint16_t id, FT81xComponent *gfx);
+  void releaseGfxComponent(uint16_t id);
+
+protected:
+  friend class FT81xGuiComponent;
+  void setTag(const uint8_t t, FT81xGuiComponent *elem);
+  void releaseTag(const uint8_t t);
+
 
 private:
   char m_prop_file[16];
@@ -103,6 +112,7 @@ private:
 
 private:
   std::map<uint8_t, FT81xGuiComponent*> mGuiComponents;
+  std::map<uint16_t, FT81xComponent*> mComponents;
 };
 
 

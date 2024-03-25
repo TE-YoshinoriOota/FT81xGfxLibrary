@@ -16,8 +16,11 @@ FT81xMediaComponent::~FT81xMediaComponent() {
 }
 
 FT81xMediaComponent::FT81xMediaComponent(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp, MediaOperation *mem, const uint32_t chunk)
- : FT81xGfxComponent(reg, cmd, disp) {
+ : FT81xComponent() {
   myMem = mem;
+  myReg = reg;
+  myCmd = cmd;
+  myDisp = disp;
   mChunk = chunk;
   if (chunk > 0) {
     mTransBuf = (uint8_t*)malloc(mChunk*sizeof(uint8_t));

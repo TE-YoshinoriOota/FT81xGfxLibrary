@@ -12,6 +12,7 @@ FT81xMediaAudio::~FT81xMediaAudio() {
 
 FT81xMediaAudio::FT81xMediaAudio(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp, MediaOperation *mem, const uint32_t chunk)
  : FT81xMediaComponent(reg, cmd, disp, mem, chunk) {
+  mType = FT81xAudio;
   mAddress = 0;
   m_audio_size = 0;
   m_volume = 128;
@@ -19,10 +20,6 @@ FT81xMediaAudio::FT81xMediaAudio(RegisterOperation *reg, CommandOperation *cmd, 
   m_format = ULAW_SAMPLES;
   m_loop = false;
   setupMemory(mAddress);
-}
-
-void FT81xMediaAudio::draw() {
-  this->play();
 }
 
 void FT81xMediaAudio::setupMemory(uint32_t addr) {

@@ -18,6 +18,7 @@ FT81xGuiKeys::~FT81xGuiKeys() {
 
 FT81xGuiKeys::FT81xGuiKeys(RegisterOperation* reg, CommandOperation* cmd, FT81xDisplay *disp)
  : FT81xGuiComponent(reg, cmd, disp) {
+  mType = FT81xKeys;
   m_x = m_y = 0;
   m_w = m_h = 0;
   m_font = 20;

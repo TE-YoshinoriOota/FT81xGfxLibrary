@@ -16,7 +16,6 @@ class FT81xDisplay;
 class FT81xMediaMovie : public FT81xMediaComponent {
 public:
   virtual ~FT81xMediaMovie();
-  virtual void draw();
   virtual void setupMemory(uint32_t addr);
   bool play(File &file);
   void play();

@@ -4,7 +4,7 @@
 #include "FT81xGfxComponent.h"
 #include "RegisterOperation.h"
 #include "CommandOperation.h"
-#include "FT81Core.h"
+#include "FT81xCore.h"
 
 class FT81xDisplay;
 

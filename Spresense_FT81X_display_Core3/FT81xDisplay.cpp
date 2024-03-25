@@ -1,4 +1,4 @@
-#include "FT81Core.h"
+#include "FT81xCore.h"
 #include "FT81xDisplay.h"
 #include "FT81xGuiComponent.h"
 #include "FT81xGfxCircle.h"
@@ -221,7 +221,7 @@ void FT81xDisplay::clear(const uint8_t r, const uint8_t g, const uint8_t b) {
   myCmd->cmd_end();  
 }
 
-FT81xGfxComponent* FT81xDisplay::Create(enum FT81xComponents elem) {
+FT81xComponent* FT81xDisplay::Create(enum FT81xComponents elem) {
   switch(elem) {
   case FT81xCircle:
     return new FT81xGfxCircle(myReg, myCmd, this);
@@ -261,7 +261,6 @@ FT81xGfxComponent* FT81xDisplay::Create(enum FT81xComponents elem) {
         myMem = new MediaOperation(mySpi, myReg, myCmd);
       }    
       FT81xMediaImage* image = new FT81xMediaImage(myReg, myCmd, this, myMem);
-      image->setHandle(1); // need to do
       return image;
     }
   case FT81xSynth:
@@ -282,6 +281,161 @@ FT81xGfxComponent* FT81xDisplay::Create(enum FT81xComponents elem) {
     }    
   }
   return NULL;
+}
+
+void FT81xDisplay::Destroy(FT81xComponent *elem) {
+  enum FT81xComponents component_type = elem->type();
+  switch (component_type) {
+  case FT81xCircle:
+    {
+      FT81xGfxCircle *circle = (FT81xGfxCircle*)elem;
+      delete circle;
+      circle = NULL;
+    }
+    break; 
+  case FT81xRectangle:
+    {
+      FT81xGfxRectangle *rect = (FT81xGfxRectangle*)elem;
+      delete rect; 
+      rect = NULL;
+    }
+    break;
+  case FT81xTriangle:
+    {
+      FT81xGfxTriangle *tri = (FT81xGfxTriangle*)elem;
+      delete tri;
+      tri = NULL;
+    }
+    break;
+  case FT81xLine:
+    {
+      FT81xGfxLine *line = (FT81xGfxLine*)elem;
+      delete line;
+      line = NULL;
+    }
+    break;
+  case FT81xGradient:
+    {  
+      FT81xGfxGradient *grad = (FT81xGfxGradient*)elem;
+      delete grad;
+      grad = NULL;
+    }
+    break;
+  case FT81xText:
+    {
+      FT81xGfxText *text = (FT81xGfxText*)elem;
+      delete text;
+      text = NULL;
+    }
+    break;
+  case FT81xClock:
+    {
+      FT81xGfxClock *clock = (FT81xGfxClock*)elem;
+      delete clock;
+      clock = NULL;
+    }
+    break;
+  case FT81xGauge:
+    {
+      FT81xGfxGauge *gauge = (FT81xGfxGauge*)elem;
+      delete gauge;
+      gauge = NULL;
+    }
+    break;
+  case FT81xProgressbar:
+    {  
+      FT81xGfxProgressbar *progress = (FT81xGfxProgressbar*)elem;
+      delete progress;
+      progress = NULL;
+    }
+    break;
+  case FT81xSpinner:
+    {
+      FT81xGfxSpinner *spinner = (FT81xGfxSpinner*)elem;
+      delete spinner;
+      spinner = NULL;
+    }
+    break;
+  case FT81xButton:
+    {
+      FT81xGuiButton *button = (FT81xGuiButton*)elem;
+      delete button;
+      button = NULL;
+    }
+    break;
+  case FT81xKeys:
+    {  
+      FT81xGuiKeys *keys = (FT81xGuiKeys*)elem;
+      delete keys;
+      keys = NULL;
+    }
+    break;
+  case FT81xDial:
+    {
+      FT81xGuiDial *dial = (FT81xGuiDial*)elem;
+      delete dial;
+      dial = NULL;
+    }
+    break;
+  case FT81xSlider:
+    {
+      FT81xGuiSlider *slider = (FT81xGuiSlider*)elem;
+      delete slider;
+      slider = NULL;
+    }
+    break;
+  case FT81xToggle:
+    {  
+      FT81xGuiToggle *toggle = (FT81xGuiToggle*)elem;
+      delete toggle;
+      toggle = NULL;
+    }
+    break;
+  case FT81xScrollbar:
+    {
+      FT81xGuiScrollbar *scroll = (FT81xGuiScrollbar*)elem;
+      delete scroll;
+      scroll = NULL;
+    }
+    break;
+  case FT81xImage:
+    {  
+      FT81xMediaImage *image = (FT81xMediaImage*)elem;
+      delete image;
+      image = NULL;
+    }
+    break;
+  case FT81xSynth:
+    {  
+      FT81xMediaSynth *synth = (FT81xMediaSynth*)elem;
+      delete synth;
+      synth = NULL;
+    }
+    break;
+  case FT81xAudio:
+    {
+      FT81xMediaAudio *audio = (FT81xMediaAudio*)elem;
+      delete audio;
+      audio = NULL;
+    }
+    break;
+  case FT81xMovie:
+    {
+      FT81xMediaMovie *movie = (FT81xMediaMovie*)elem;
+      delete movie;
+      movie = NULL;
+    }
+    break;
+  }
+}
+
+void FT81xDisplay::addGfxComponent(uint16_t id, FT81xComponent *gfx) {
+  mComponents[id] = gfx;
+}
+
+void FT81xDisplay::releaseGfxComponent(uint16_t id) {
+  printf("releaseGfxComponent: %d\n", id);
+  mComponents.erase(id);
 }
 
 void FT81xDisplay::releaseTag(uint8_t t) {
@@ -318,11 +472,28 @@ bool FT81xDisplay::senseGuiComponents() {
 }
 
 void FT81xDisplay::updateCanvas() {
+  for (auto elem = mComponents.begin(); elem != mComponents.end(); ++elem) {
+    if (elem->second->type() != FT81xImage) {
+      FT81xGfxComponent *gfx = (FT81xGfxComponent*)elem->second;
+      if (gfx->getVisible() == true)  gfx->draw();
+    } else {
+      FT81xMediaImage *image = (FT81xMediaImage*)elem->second;
+      if (image->getVisible() == true) image->draw(); 
+    }
+  }
   myCmd->cmd_start();
   myCmd->cmd(END_DL());
   myCmd->cmd(SWAP());  
   myCmd->cmd_end();  
 }
+
+void FT81xDisplay::swap() {
+  myCmd->cmd_start();
+  myCmd->cmd(END_DL());
+  myCmd->cmd(SWAP());  
+  myCmd->cmd_end();    
+}
+
 
 
 bool FT81xDisplay::doTouchCalibration() {

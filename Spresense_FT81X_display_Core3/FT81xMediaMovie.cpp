@@ -13,11 +13,11 @@ FT81xMediaMovie::~FT81xMediaMovie() {
 
 FT81xMediaMovie::FT81xMediaMovie(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp, MediaOperation *mem, const uint32_t chunk)
  : FT81xMediaComponent(reg, cmd, disp, mem, chunk)  {
-  //mAddress = 0;
+  mType = FT81xMovie;
+  // mAddress = 0;
   m_options = OPT_MEDIAFIFO;
 }
 
-void FT81xMediaMovie::draw() {  Serial.println("ERROR: FT81xMediaMovie not support draw() function."); }
 
 void FT81xMediaMovie::setupMemory(uint32_t addr) {
   UNUSED(addr);

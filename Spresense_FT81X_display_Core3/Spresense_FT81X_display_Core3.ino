@@ -1,4 +1,4 @@
-#include "FT81Core.h"
+#include "FT81xCore.h"
 #include <SDHCI.h>
 SDClass SD;
 
@@ -51,17 +51,19 @@ void setup() {
   display->readyCanvas();
   display->clear(255, 255, 255);
 
+
+
   // circle test
   FT81xGfxCircle* circle0 = (FT81xGfxCircle*)display->Create(FT81xCircle);
   FT81xGfxCircle* circle1 = (FT81xGfxCircle*)display->Create(FT81xCircle);
   circle0->setPosition(200, 200);
   circle0->setSize(30);
   circle0->setColor(255, 255, 0); 
-  circle0->draw();
+  //circle0->draw();
   circle1->setPosition(100, 100);
   circle1->setSize(20);
   circle1->setColor(0, 255, 0);
-  circle1->draw();
+  //circle1->draw();
 
   // rectangle test
   FT81xGfxRectangle* rect0 = (FT81xGfxRectangle*)display->Create(FT81xRectangle);
@@ -69,22 +71,22 @@ void setup() {
   rect0->setPosition(300, 200);
   rect0->setSize(30, 40);
   rect0->setColor(255, 0, 255);
-  rect0->draw();
+  //rect0->draw();
   rect1->setPosition(400, 100);
   rect1->setSize(40, 15);
   rect1->setColor(0, 255, 255);
   rect1->setCorner(10);
-  rect1->draw();
+  //rect1->draw();
 
   // triangle test
   FT81xGfxTriangle* tri0 = (FT81xGfxTriangle*)display->Create(FT81xTriangle);
   FT81xGfxTriangle* tri1 = (FT81xGfxTriangle*)display->Create(FT81xTriangle);
   tri0->setColor(128, 128, 128);
   tri0->setPoints(500, 200, 550, 100, 600, 200);
-  tri0->draw();
+  //tri0->draw();
   tri1->setColor(0, 128, 128);
   tri1->setPoints(600, 80, 680, 100, 580, 220);
-  tri1->draw();
+  //tri1->draw();
 
   // Line test
   FT81xGfxLine* line0 = (FT81xGfxLine*)display->Create(FT81xLine);
@@ -92,11 +94,21 @@ void setup() {
   line0->setColor(128, 0, 128);
   line0->setWidth(10);
   line0->setPoints(600, 300, 700, 400);
-  line0->draw();
+  //line0->draw();
   line1->setColor(30, 30, 128);
   line1->setWidth(20);
   line1->setPoints(650, 100, 750, 450);
-  line1->draw();
+  //line1->draw();
+
+  // Clock Test
+  FT81xGfxClock* clock = (FT81xGfxClock*)display->Create(FT81xClock);
+  clock->setTime(10, 10, 0);
+  clock->setColor(255, 255, 255);
+  clock->setBgColor(128, 128, 200);
+  clock->setPosition(400, 200);
+  clock->setSize(40);
+  //clock->draw();
+
 
   // Gradient Test
   FT81xGfxGradient* grad0 = (FT81xGfxGradient*)display->Create(FT81xGradient);
@@ -105,12 +117,11 @@ void setup() {
   grad0->setEndColor(255, 255, 255);
   grad0->setPosition(100, 300);
   grad0->setSize(100, 50);
-  grad0->draw();
+  //grad0->draw();
   grad1->setStartColor(0, 0, 255);
   grad1->setEndColor(255, 0, 0);
   grad1->setPosition(200, 350);
   grad1->setSize(200, 80);
-  grad1->draw();
 
   // Text Test
   FT81xGfxText* text0 = (FT81xGfxText*)display->Create(FT81xText);
@@ -119,22 +130,13 @@ void setup() {
   text0->setPosition(100, 200);
   text0->setColor(0, 0, 255);
   text0->setText("Hello EVE!");
-  text0->draw();
 
   text1->setFont(32);
   text1->setPosition(500, 400);
   text1->setColor(255, 0, 0);
   text1->set3dEffect();
-  text1->draw("OK EVE!!");
+  text1->setText("OK EVE!!");
 
-  // Clock Test
-  FT81xGfxClock* clock = (FT81xGfxClock*)display->Create(FT81xClock);
-  clock->setTime(10, 10, 0);
-  clock->setColor(255, 255, 255);
-  clock->setBgColor(128, 128, 200);
-  clock->setPosition(400, 200);
-  clock->setSize(50);
-  clock->draw();
 
   // Gauge Test
   FT81xGfxGauge* Gauge = (FT81xGfxGauge*)display->Create(FT81xGauge);
@@ -145,7 +147,6 @@ void setup() {
   Gauge->setNeedleColor(255, 128, 128);
   Gauge->setPosition(500, 300);
   Gauge->setSize(60);
-  Gauge->draw();
 
   // Progressbar Test
   FT81xGfxProgressbar* progress = (FT81xGfxProgressbar*)display->Create(FT81xProgressbar);
@@ -155,60 +156,52 @@ void setup() {
   progress->setPosition(100, 10);
   progress->setSize(600, 15);
   progress->setRange(60);
-  progress->draw();
 
   // display
   display->updateCanvas();
 
   delay(2000);
 
-#if 1
-  for (int n = 0; n <= 10; ++n) {
+
+
+  for (int n = 0; n <= 1; ++n) {
     display->readyCanvas();
     display->clear(255, 255, 255);
 
-    circle0->draw();
-    circle1->draw();
-    rect0->draw();
-    rect1->draw();
-    tri0->draw();
-    tri1->draw();
-    line0->draw();
-    line1->draw();
-    grad0->draw();
-    grad1->draw();
-    text0->draw();
     char buf[10] = {0};
     if (n == 60) {
       sprintf(buf, "10:11:00");
     } else {
       sprintf(buf, "10:10:%02d", n);
     }
-    text1->draw(buf);
-    clock->draw(10, 10, n);
-    Gauge->draw(n);
-    progress->draw(n);
+    text1->setText(buf);
+    clock->setTime(10, 10, n);
+    progress->setValue(n);
+    Gauge->setValue(n);
 
     display->updateCanvas();
     delay(1000);
   }
 
+  display->Destroy(circle0);
+  //display->Destroy(circle1);
+  display->Destroy(rect0);
+  display->Destroy(rect1);
+  display->Destroy(tri0);
+  display->Destroy(tri1);  
+  display->Destroy(line0);    
+  display->Destroy(line1);    
+  //display->Destroy(grad0);   
+  grad0->setVisible(false);  
+  display->Destroy(grad1);     
+  //display->Destroy(text0);     
+  //display->Destroy(text1); 
+  text0->setVisible(false);    
+  display->Destroy(clock);  
+  display->Destroy(Gauge);  
+  display->Destroy(progress);
 
-  delete circle0; circle0 = NULL;
-  // delete circle1; circle1 = NULL;
-  delete rect0; rect0 = NULL;
-  delete rect1; rect1 = NULL;
-  delete tri0; tri0 = NULL;
-  delete tri1; tri1 = NULL;
-  delete line0; line0 = NULL;
-  delete line1; line1 = NULL;
-  // delete grad0; grad0 = NULL;
-  delete grad1; grad1 = NULL;
-  // delete text0; text0 = NULL;
-  // delete text1; text1 = NULL; // reuse text1 below procedures
-  delete clock; clock = NULL;
-  delete Gauge; Gauge = NULL;
-
+#if 1
   // Spinner Test
   FT81xGfxSpinner* spinner = (FT81xGfxSpinner*)display->Create(FT81xSpinner);
   spinner->setColor(200, 200, 200);
@@ -221,51 +214,47 @@ void setup() {
 
   display->readyCanvas();
   display->clear(255, 255, 255);
-  text1->draw("Circle Style"); // Text should be first
-  spinner->draw();
+  spinner->setCircleStyle();
+  text1->draw("Circle Style"); 
   display->updateCanvas();
   delay(3000);
 
   display->readyCanvas();
   display->clear(255, 255, 255);
-  text1->draw("Clock Style"); // Text should be first
   spinner->setClockStyle();
-  spinner->draw();
+  text1->draw("Clock Style"); 
   display->updateCanvas();
   delay(3000);
 
   display->readyCanvas();
   display->clear(255, 255, 255);
-  text1->draw("Line Style"); // Text should be first
   spinner->setLineStyle();
-  spinner->draw();
+  text1->draw("Line Style"); 
   display->updateCanvas();
   delay(3000);
 
   display->readyCanvas();
   display->clear(255, 255, 255);
-  text1->draw("Dot Style"); // Text should be first
   spinner->setDotStyle();
-  spinner->draw();
+  text1->draw("Dot Style"); 
   display->updateCanvas();
   delay(3000);
 
-  delete spinner; spinner = NULL;
-
+  display->Destroy(spinner);
 
   // Touch Test
   display->readyCanvas();
   display->clear(255, 255, 255);  
-  display->forceTouchCalibration();
-  //display->doTouchCalibration();
+  //display->forceTouchCalibration();
+  display->doTouchCalibration();
   
   uint16_t x, y;
   uint16_t num = 0;
   display->readyCanvas();
   display->clear(255, 255, 255);  
   text1->setText("Touch Display");  
-  text1->draw();  
   display->updateCanvas();
+
   while (num < 10) {
     display->readyCanvas();
     if (display->isTouched(&x, &y)) {
@@ -276,10 +265,9 @@ void setup() {
       ++num;
     }
     display->clear(255, 255, 255);  
-    text1->draw();  
-    circle1->draw();
     display->updateCanvas();
   }
+  circle1->setVisible(false);
 
   // Gui Button Test
   FT81xGuiButton *button0 = (FT81xGuiButton*)display->Create(FT81xButton);
@@ -315,16 +303,12 @@ void setup() {
       text1->setText("Button 2 is pushed!");
       ++num;
     }
-    button0->draw();
-    button1->draw();
-    text1->draw();
     display->updateCanvas();
     delay(100);
   }
 
-  delete button0; button0 = NULL;
-  delete button1; button1 = NULL;
-
+  display->Destroy(button0);
+  display->Destroy(button1);
 
   // Gui Keys test
   
@@ -350,13 +334,13 @@ void setup() {
       text1->setText(input.c_str());
       ++num;
     }
-    text1->draw();
-    keys->draw();
+    //text1->draw();
+    //keys->draw();
     display->updateCanvas();
     delay(150);
   }
 
-  delete keys; keys = NULL;
+  display->Destroy(keys);
 
   display->setTouchSensitivity(0xffff);
 
@@ -410,18 +394,19 @@ void setup() {
     }
 
     display->clear(255, 255, 255);    
-    text1->draw();
-    text0->draw();
-    dial->draw();
-    slider->draw();
-    toggle->draw();
+    //text1->draw();
+    //text0->draw();
+    //dial->draw();
+    //slider->draw();
+    //toggle->draw();
     display->updateCanvas();
     delay(30);
   }
 
-  delete keys; keys = NULL;
-  delete slider; slider = NULL;
-  delete toggle; toggle = NULL;
+  display->Destroy(dial);
+  display->Destroy(slider);
+  display->Destroy(toggle);
+
 
   // Gui Scrollbar
   FT81xGuiScrollbar *scroll0 = (FT81xGuiScrollbar*)display->Create(FT81xScrollbar);
@@ -449,6 +434,7 @@ void setup() {
 
   const uint16_t base_x = 500;
   const uint16_t base_y = 300;
+  text0->setVisible(true);
   text0->setPosition(base_x, base_y);
   text0->setText("move scrollbar");
   text1->setText("scrollbar values");  
@@ -469,13 +455,14 @@ void setup() {
     }
 
     display->clear(255, 255, 255);    
-    text1->draw();
-    text0->draw();
-    scroll0->draw();
-    scroll1->draw();
     display->updateCanvas();
     delay(30);
   }
+
+  text0->setVisible(false);
+  text1->setVisible(false);
+  display->Destroy(scroll0);
+  display->Destroy(scroll1);
 #endif
 
   // Image Test
@@ -507,7 +494,8 @@ void setup() {
     image->setPosition(dx, dy);
     display->readyCanvas();
     display->clear(255, 255, 255);
-    image->draw();
+    //image->draw();
+    //display->swap();    
     display->updateCanvas();
     delay(10);
   }
@@ -518,15 +506,17 @@ void setup() {
     image->setRotation(dr);
     display->readyCanvas();
     display->clear(255, 255, 255);
-    image->draw();
+    //image->draw();
+    //display->swap();        
     display->updateCanvas();
     delay(10);
   }
 
-  delete image;
+  display->Destroy(image);
 
 #if 1
   // test synth
+  text0->setVisible(true);
   Serial.println("Synth Test");
   FT81xMediaSynth *synth = (FT81xMediaSynth*)display->Create(FT81xSynth);
   synth->setVolume(255);
@@ -554,7 +544,7 @@ void setup() {
     display->readyCanvas();
     display->clear(255, 255, 255);   
     synth->play();
-    text0->draw();
+    //text0->draw();
     display->updateCanvas();
     delay(1000);
   }
@@ -567,12 +557,13 @@ void setup() {
     display->readyCanvas();
     display->clear(255, 255, 255);   
     synth->play();
-    text0->draw();
+    //text0->draw();
     display->updateCanvas();
     delay(1000);
   }
   synth->stop();
-  delete synth;
+
+  display->Destroy(synth);
 
 
   // Test Audio
@@ -597,7 +588,7 @@ void setup() {
 
   display->readyCanvas();
   display->clear(255, 255, 255); 
-  text0->draw();
+  //text0->draw();
   audio->play();
   display->updateCanvas();
   delay(5000);
@@ -620,7 +611,7 @@ void setup() {
 
   display->readyCanvas();
   display->clear(255, 255, 255); 
-  text0->draw();
+  //text0->draw();
   audio->play();
   display->updateCanvas();
   delay(5000);
@@ -643,15 +634,17 @@ void setup() {
 
   display->readyCanvas();
   display->clear(255, 255, 255); 
-  text0->draw();
+  //text0->draw();
   audio->play();
   display->updateCanvas();
   delay(5000);
   audio->stop();
 
-  delete audio;
+  display->Destroy(audio);
+
 #endif
 
+  text0->setVisible(false);
   // Test Motion Jpeg
   Serial.println("Motion Jpeg Test");
   FT81xMediaMovie *movie = (FT81xMediaMovie*)display->Create(FT81xMovie);
@@ -711,26 +704,29 @@ void setup() {
   movie->play(myMovie);
   myMovie.close();
 
-  delete movie;
+  display->Destroy(movie);
 
+  grad0->setVisible(true);
   grad0->setStartColor(0, 0, 255);
   grad0->setEndColor(255, 255, 255);
   grad0->setPosition(0, 0);
   grad0->setSize(800, 480);
 
+  text0->setVisible(true);
   text0->setPosition(100, 200);
   text0->setColor(255, 255, 255);
   text0->setText("Congrats! all tests have passed!");
 
   display->readyCanvas();
   display->clear(255, 255, 255);
-  grad0->draw();
-  text0->draw();
+  //grad0->draw();
+  //text0->draw();
   display->updateCanvas();
 
-  delete grad0;
-  delete text0;
-  delete text1;
+  display->Destroy(circle1);
+  display->Destroy(grad0);
+  display->Destroy(text0);
+  display->Destroy(text1);
 }
 
 void loop() {

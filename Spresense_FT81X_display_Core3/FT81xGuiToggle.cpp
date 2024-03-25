@@ -15,6 +15,7 @@ FT81xGuiToggle::~FT81xGuiToggle() {
 
 FT81xGuiToggle::FT81xGuiToggle(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp)
  : FT81xGuiComponent(reg, cmd, disp) {
+  mType = FT81xToggle;
   m_x = m_y = 0;
   m_w = 0;
   m_font = 20;
