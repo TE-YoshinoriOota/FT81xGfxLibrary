@@ -7,18 +7,18 @@
 #include "FT81xGfxLine.h"
 #include "FT81xGfxGradient.h"
 #include "FT81xGfxText.h"
-#include "FT81xComponentGauge.h"
-#include "FT81xComponentClock.h"
-#include "FT81xComponentProgressbar.h"
-#include "FT81xComponentSpinner.h"
+#include "FT81xGfxGauge.h"
+#include "FT81xGfxClock.h"
+#include "FT81xGfxProgressbar.h"
+#include "FT81xGfxSpinner.h"
 
-#include "FT81xInteractionComponent.h"
-#include "FT81xInteractionButton.h"
-#include "FT81xInteractionKeys.h"
-#include "FT81xInteractionDial.h"
-#include "FT81xInteractionSlider.h"
-#include "FT81xInteractionToggle.h"
-#include "FT81xInteractionScrollbar.h"
+#include "FT81xGuiComponent.h"
+#include "FT81xGuiButton.h"
+#include "FT81xGuiKeys.h"
+#include "FT81xGuiDial.h"
+#include "FT81xGuiSlider.h"
+#include "FT81xGuiToggle.h"
+#include "FT81xGuiScrollbar.h"
 
 #include "FT81xMediaComponent.h"
 #include "FT81xMediaImage.h"
@@ -221,7 +221,7 @@ void FT81xDisplay::clear(const uint8_t r, const uint8_t g, const uint8_t b) {
   myCmd->cmd_end();  
 }
 
-FT81xGuiComponent* FT81xDisplay::Create(enum GuiComponents elem) {
+FT81xGfxComponent* FT81xDisplay::Create(enum FT81xComponents elem) {
   switch(elem) {
   case FT81xCircle:
     return new FT81xGfxCircle(myReg, myCmd, this);
@@ -236,25 +236,25 @@ FT81xGuiComponent* FT81xDisplay::Create(enum GuiComponents elem) {
   case FT81xText:
     return new FT81xGfxText(myReg, myCmd, this);
   case FT81xClock:
-    return new FT81xComponentClock(myReg, myCmd, this);
+    return new FT81xGfxClock(myReg, myCmd, this);
   case FT81xGauge:
-    return new FT81xComponentGauge(myReg, myCmd, this);
+    return new FT81xGfxGauge(myReg, myCmd, this);
   case FT81xProgressbar:
-    return new FT81xComponentProgressbar(myReg, myCmd, this);
+    return new FT81xGfxProgressbar(myReg, myCmd, this);
   case FT81xSpinner:
-    return new FT81xComponentSpinner(myReg, myCmd, this);
+    return new FT81xGfxSpinner(myReg, myCmd, this);
   case FT81xButton:
-    return new FT81xInteractionButton(myReg, myCmd, this);
+    return new FT81xGuiButton(myReg, myCmd, this);
   case FT81xKeys:
-    return new FT81xInteractionKeys(myReg, myCmd, this);
+    return new FT81xGuiKeys(myReg, myCmd, this);
   case FT81xDial:
-    return new FT81xInteractionDial(myReg, myCmd, this);
+    return new FT81xGuiDial(myReg, myCmd, this);
   case FT81xSlider:
-    return new FT81xInteractionSlider(myReg, myCmd, this);
+    return new FT81xGuiSlider(myReg, myCmd, this);
   case FT81xToggle:
-    return new FT81xInteractionToggle(myReg, myCmd, this);
+    return new FT81xGuiToggle(myReg, myCmd, this);
   case FT81xScrollbar:
-    return new FT81xInteractionScrollbar(myReg, myCmd, this);
+    return new FT81xGuiScrollbar(myReg, myCmd, this);
   case FT81xImage:
     {
       if (myMem == NULL) {
@@ -290,19 +290,19 @@ void FT81xDisplay::releaseTag(uint8_t t) {
   myCmd->cmd(CLEAR_TAG(t));
   myCmd->cmd(TAG_MASK(0));  
   myCmd->cmd_end();
-  mInteractionComponents.erase(t);  
+  mGuiComponents.erase(t);  
 }
 
-void FT81xDisplay::setTag(const uint8_t t, FT81xInteractionComponent *elem) {
-  mInteractionComponents[t] = elem;
+void FT81xDisplay::setTag(const uint8_t t, FT81xGuiComponent *elem) {
+  mGuiComponents[t] = elem;
 }
 
-bool FT81xDisplay::senseInteractionComponents() {
+bool FT81xDisplay::senseGuiComponents() {
   if (!this->isTouched()) return false;
   uint8_t tag = _read_tag();
   // Serial.println("tag : " + String(tag));
   if (tag == 0) return false;
-  FT81xInteractionComponent* elem = mInteractionComponents[tag];
+  FT81xGuiComponent* elem = mGuiComponents[tag];
   if (elem != NULL) { 
     if (elem->isTracker()) {
       uint32_t value = _read_tracker_value(tag);

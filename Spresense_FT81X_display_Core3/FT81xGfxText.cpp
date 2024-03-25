@@ -12,7 +12,7 @@ FT81xGfxText::~FT81xGfxText() {
 }
 
 FT81xGfxText::FT81xGfxText(RegisterOperation* reg, CommandOperation* cmd, FT81xDisplay *disp)
- : FT81xGuiComponent(reg, cmd, disp) {
+ : FT81xGfxComponent(reg, cmd, disp) {
   mType = FT81xText;
   m_x = m_y = 0;
   m_font = 31;

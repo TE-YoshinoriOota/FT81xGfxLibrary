@@ -5,13 +5,13 @@
 /*  FT81xGfxLine Class                    */
 /********************************************/
 
-#include "FT81xGuiComponent.h"
+#include "FT81xGfxComponent.h"
 #include "RegisterOperation.h"
 #include "CommandOperation.h"
 
 class FT81xDisplay;
 
-class FT81xGfxLine : public FT81xGuiComponent {
+class FT81xGfxLine : public FT81xGfxComponent {
 public:
   virtual ~FT81xGfxLine();
   virtual void draw();

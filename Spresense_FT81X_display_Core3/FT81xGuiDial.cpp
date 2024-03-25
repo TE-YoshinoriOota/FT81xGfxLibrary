@@ -1,16 +1,16 @@
-#include "FT81xInteractionDial.h"
+#include "FT81xGuiDial.h"
 #include "FT81xDisplay.h"
 
 /********************************************/
-/*  FT81xInteractionDial Class            */
+/*  FT81xGuiDial Class                      */
 /********************************************/  
 
-FT81xInteractionDial::~FT81xInteractionDial() {
+FT81xGuiDial::~FT81xGuiDial() {
   
 }
 
-FT81xInteractionDial::FT81xInteractionDial(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp)
- : FT81xInteractionComponent(reg, cmd, disp) {
+FT81xGuiDial::FT81xGuiDial(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp)
+ : FT81xGuiComponent(reg, cmd, disp) {
   m_x = m_y = 0;
   m_rad = 0;
   m_color = COLOR_RGB(255, 255, 255);
@@ -19,7 +19,7 @@ FT81xInteractionDial::FT81xInteractionDial(RegisterOperation *reg, CommandOperat
   m_value = 0;
 }
 
-void FT81xInteractionDial::draw() {
+void FT81xGuiDial::draw() {
   myCmd->cmd_start();
   myCmd->cmd(TAG_MASK(1));
   myCmd->cmd(TAG(mTag));  
@@ -42,7 +42,7 @@ void FT81xInteractionDial::draw() {
 }
 
 
-void FT81xInteractionDial::doInteraction_(const uint32_t value) {
+void FT81xGuiDial::doInteraction_(const uint32_t value) {
   m_value = value;
   m_normValue = (value*100)/(0xffff);
   Serial.println("Dial::doInteruction_ is called");

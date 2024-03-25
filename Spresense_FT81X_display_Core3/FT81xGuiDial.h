@@ -2,19 +2,19 @@
 #define FT81XINTERACTIONDIAL_HEADER_GUARD
 
 
-#include "FT81xInteractionComponent.h"
+#include "FT81xGuiComponent.h"
 #include "RegisterOperation.h"
 #include "CommandOperation.h"
 
 class FT81xDisplay;
 
 /********************************************/
-/*  FT81xInteractionDial Class            */
+/*  FT81xGuiDial Class                      */
 /********************************************/  
 
-class FT81xInteractionDial : public FT81xInteractionComponent {
+class FT81xGuiDial : public FT81xGuiComponent {
 public:
-  virtual ~FT81xInteractionDial();
+  virtual ~FT81xGuiDial();
   virtual void draw();
   void setColor(const uint8_t r, const uint8_t g, const uint8_t b) { m_color = COLOR_RGB(r, g, b); }
   void setDialColor(const uint8_t r, const uint8_t g, const uint8_t b) { m_bgcolor = COLOR_RGB(r, g, b); }
@@ -24,7 +24,7 @@ public:
 
 protected:
   friend class FT81xDisplay;
-  FT81xInteractionDial(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp);
+  FT81xGuiDial(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp);
   virtual void doInteraction_(const uint32_t value);
   virtual bool isTracker() { return true; }
   

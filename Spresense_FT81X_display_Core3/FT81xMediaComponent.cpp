@@ -16,7 +16,7 @@ FT81xMediaComponent::~FT81xMediaComponent() {
 }
 
 FT81xMediaComponent::FT81xMediaComponent(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp, MediaOperation *mem, const uint32_t chunk)
- : FT81xGuiComponent(reg, cmd, disp) {
+ : FT81xGfxComponent(reg, cmd, disp) {
   myMem = mem;
   mChunk = chunk;
   if (chunk > 0) {

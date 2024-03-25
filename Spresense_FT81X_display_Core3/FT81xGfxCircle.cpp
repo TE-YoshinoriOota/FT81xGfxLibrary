@@ -10,7 +10,7 @@ FT81xGfxCircle::~FT81xGfxCircle() {
 }
 
 FT81xGfxCircle::FT81xGfxCircle(RegisterOperation* reg, CommandOperation* cmd, FT81xDisplay *disp)
- : FT81xGuiComponent(reg, cmd, disp) {
+ : FT81xGfxComponent(reg, cmd, disp) {
   mType = FT81xCircle;
   m_x = m_y = 0;
   m_r = 0;

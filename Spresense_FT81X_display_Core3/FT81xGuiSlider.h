@@ -1,45 +1,44 @@
-#ifndef FT81XINTERACTIONBUTTON_HEADER_GUARD
-#define FT81XINTERACTIONBUTTON_HEADER_GUARD
+#ifndef FT81XINTERACTIONSLIDER_HEADER_GUARD
+#define FT81XINTERACTIONSLIDER_HEADER_GUARD
 
-#include "FT81xInteractionComponent.h"
+#include "FT81xGuiComponent.h"
 #include "RegisterOperation.h"
 #include "CommandOperation.h"
 
 class FT81xDisplay;
 
+
 /********************************************/
-/*  FT81xInteractionButton Class            */
+/*  FT81xGuiSlider Class                    */
 /********************************************/  
 
-class FT81xInteractionButton : public FT81xInteractionComponent {
+class FT81xGuiSlider : public FT81xGuiComponent {
 public:
-  virtual ~FT81xInteractionButton();
+  virtual ~FT81xGuiSlider();
   virtual void draw();
-  void setFont(const uint8_t font);
   void setColor(const uint8_t r, const uint8_t g, const uint8_t b) { m_color = COLOR_RGB(r, g, b); }
-  void setButtonColor(const uint8_t r, const uint8_t g, const uint8_t b) { m_bgcolor = COLOR_RGB(r, g, b); }
+  void setSliderColor(const uint8_t r, const uint8_t g, const uint8_t b) { m_bgcolor = COLOR_RGB(r, g, b); }
   void setPosition(const uint16_t x, const uint16_t y) { m_x = x; m_y = y; }
   void setSize(const uint16_t w, const uint16_t h) { m_w = w; m_h = h; }
-  void setText(const char text[]);
-  bool pushed();
+  void setRange(const uint16_t range) { m_range = range; }
+  uint16_t readValue() { return m_value; }
 
 protected:
   friend class FT81xDisplay;
-  FT81xInteractionButton(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp);
+  FT81xGuiSlider(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp);
   virtual void doInteraction_(const uint32_t value);
-  virtual bool isTracker() { return false; }
-
+  virtual bool isTracker() { return true; }
+  
 private:
   uint16_t m_x;
   uint16_t m_y;
   uint16_t m_w;
   uint16_t m_h;
-  uint8_t  m_font;
   uint32_t m_color;
   uint32_t m_bgcolor;
   uint16_t m_options;
-  uint8_t  m_pushed;
-  char *m_text;
+  uint16_t m_range;
+  uint16_t m_value;
 };
 
 

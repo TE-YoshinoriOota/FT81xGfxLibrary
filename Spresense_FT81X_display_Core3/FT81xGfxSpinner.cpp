@@ -1,16 +1,16 @@
-#include "FT81xComponentSpinner.h"
+#include "FT81xGfxSpinner.h"
 
 
 /********************************************/
-/*  FT81xComponentSpinner Class                  */
+/*  FT81xGfxSpinner Class                   */
 /********************************************/
 
-FT81xComponentSpinner::~FT81xComponentSpinner() {
+FT81xGfxSpinner::~FT81xGfxSpinner() {
 
 }
 
-FT81xComponentSpinner::FT81xComponentSpinner(RegisterOperation* reg, CommandOperation* cmd, FT81xDisplay *disp)
- : FT81xGuiComponent(reg, cmd, disp) {
+FT81xGfxSpinner::FT81xGfxSpinner(RegisterOperation* reg, CommandOperation* cmd, FT81xDisplay *disp)
+ : FT81xGfxComponent(reg, cmd, disp) {
   mType = FT81xSpinner;
   m_x = m_y = 0;
   m_w = m_h = 0;
@@ -20,7 +20,7 @@ FT81xComponentSpinner::FT81xComponentSpinner(RegisterOperation* reg, CommandOper
   m_color = 0;
 }
 
-void FT81xComponentSpinner::draw() {
+void FT81xGfxSpinner::draw() {
   myCmd->cmd_start();
   myCmd->cmd(COLOR(m_color));  
   myCmd->cmd(CMD_SPINNER);

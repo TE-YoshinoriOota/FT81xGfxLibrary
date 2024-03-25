@@ -1,7 +1,7 @@
 #ifndef FT81XMEDIACOMPONENT_HEADER_GUARD
 #define FT81XMEDIACOMPONENT_HEADER_GUARD
 
-#include "FT81xGuiComponent.h"
+#include "FT81xGfxComponent.h"
 #include "RegisterOperation.h"
 #include "CommandOperation.h"
 
@@ -12,7 +12,7 @@ FT81xDisplay;
 /*  FT81xMediaCompoennt Class               */
 /********************************************/
 
-class FT81xMediaComponent : public FT81xGuiComponent {
+class FT81xMediaComponent : public FT81xGfxComponent {
 public:
   virtual ~FT81xMediaComponent();
   virtual void draw() = 0;

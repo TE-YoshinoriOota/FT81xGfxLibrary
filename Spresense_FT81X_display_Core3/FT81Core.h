@@ -86,7 +86,7 @@
 #define QVGA_FT_DispDither   1
 
 
-enum GuiComponents {
+enum FT81xComponents {
    FT81xCircle
   ,FT81xRectangle
   ,FT81xTriangle

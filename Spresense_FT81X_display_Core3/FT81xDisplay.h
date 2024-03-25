@@ -6,12 +6,12 @@
 #include "RegisterOperation.h"
 #include "CommandOperation.h"
 #include "MediaOperation.h"
+#include "FT81xGfxComponent.h"
 #include "FT81xGuiComponent.h"
-#include "FT81xInteractionComponent.h"
 #include "FT81Core.h"
 
+class FT81xGfxComponent;
 class FT81xGuiComponent;
-class FT81xInteractionComponent;
 
 /********************************************/
 /*  FT81xDisplay Class                      */
@@ -56,7 +56,7 @@ public:
   void begin(enum DisplaySize disp);
   void readyCanvas();
   void clear(const uint8_t r, const uint8_t g, const uint8_t b);
-  bool senseInteractionComponents();
+  bool senseGuiComponents();
   void updateCanvas();
 
   uint16_t getDisplayWidth() { return mDispProp.FT_DispWidth; }
@@ -64,11 +64,11 @@ public:
   uint32_t getBgColor() { return m_bgcolor;  }
 
 public:
-  FT81xGuiComponent* Create(enum GuiComponents elem);
+  FT81xGfxComponent* Create(enum FT81xComponents elem);
 
 protected:
-  friend class FT81xInteractionComponent;
-  void setTag(const uint8_t t, FT81xInteractionComponent *elem);
+  friend class FT81xGuiComponent;
+  void setTag(const uint8_t t, FT81xGuiComponent *elem);
   void releaseTag(const uint8_t t);
 
 public:
@@ -102,7 +102,7 @@ private:
   static MediaOperation *myMem;
 
 private:
-  std::map<uint8_t, FT81xInteractionComponent*> mInteractionComponents;
+  std::map<uint8_t, FT81xGuiComponent*> mGuiComponents;
 };
 
 

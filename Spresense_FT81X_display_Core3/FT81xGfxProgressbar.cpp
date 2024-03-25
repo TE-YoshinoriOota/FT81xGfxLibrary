@@ -1,15 +1,15 @@
-#include "FT81xComponentProgressbar.h"
+#include "FT81xGfxProgressbar.h"
 
 /********************************************/
-/*  FT81xComponentProgressbar Class               */
+/*  FT81xGfxProgressbar Class               */
 /********************************************/
 
-FT81xComponentProgressbar::~FT81xComponentProgressbar() {
+FT81xGfxProgressbar::~FT81xGfxProgressbar() {
 
 }
 
-FT81xComponentProgressbar::FT81xComponentProgressbar(RegisterOperation* reg, CommandOperation* cmd, FT81xDisplay *disp)
- : FT81xGuiComponent(reg, cmd, disp) {
+FT81xGfxProgressbar::FT81xGfxProgressbar(RegisterOperation* reg, CommandOperation* cmd, FT81xDisplay *disp)
+ : FT81xGfxComponent(reg, cmd, disp) {
   mType = FT81xProgressbar;
   m_range = 0;
   m_x = m_y = 0;
@@ -19,7 +19,7 @@ FT81xComponentProgressbar::FT81xComponentProgressbar(RegisterOperation* reg, Com
   m_options = OPT_3D;
 }
 
-void FT81xComponentProgressbar::draw() {
+void FT81xGfxProgressbar::draw() {
   myCmd->cmd_start();
   myCmd->cmd(COLOR(m_fgcolor));
   myCmd->cmd(CMD_BGCOLOR);
@@ -32,7 +32,7 @@ void FT81xComponentProgressbar::draw() {
   myCmd->cmd_end();
 }
 
-void FT81xComponentProgressbar::draw(const uint16_t value) {
+void FT81xGfxProgressbar::draw(const uint16_t value) {
   m_value = value;
   draw();
 }

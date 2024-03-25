@@ -6,13 +6,13 @@
 /*  FT81xGfxRectangle Class                    */
 /********************************************/
 
-#include "FT81xGuiComponent.h"
+#include "FT81xGfxComponent.h"
 #include "RegisterOperation.h"
 #include "CommandOperation.h"
 
 class FT81xDisplay;
 
-class FT81xGfxRectangle : public FT81xGuiComponent {
+class FT81xGfxRectangle : public FT81xGfxComponent {
 public:
   virtual ~FT81xGfxRectangle();
   virtual void draw();

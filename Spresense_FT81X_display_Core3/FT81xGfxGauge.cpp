@@ -1,16 +1,16 @@
-#include "FT81xComponentGauge.h"
+#include "FT81xGfxGauge.h"
 
 
 /********************************************/
-/*  FT81xComponentGauge Class               */
+/*  FT81xGfxGauge Class                     */
 /********************************************/
 
-FT81xComponentGauge::~FT81xComponentGauge() {
+FT81xGfxGauge::~FT81xGfxGauge() {
 
 }
 
-FT81xComponentGauge::FT81xComponentGauge(RegisterOperation* reg, CommandOperation* cmd, FT81xDisplay *disp)
- : FT81xGuiComponent(reg, cmd, disp) {
+FT81xGfxGauge::FT81xGfxGauge(RegisterOperation* reg, CommandOperation* cmd, FT81xDisplay *disp)
+ : FT81xGfxComponent(reg, cmd, disp) {
   mType = FT81xGauge;
   m_major = m_minor = m_range = 0;
   m_x = m_y = 0;
@@ -22,7 +22,7 @@ FT81xComponentGauge::FT81xComponentGauge(RegisterOperation* reg, CommandOperatio
   m_options = OPT_3D;
 }
 
-void FT81xComponentGauge::draw() {
+void FT81xGfxGauge::draw() {
   myCmd->cmd_start();
   myCmd->cmd(COLOR(m_fgcolor));
   myCmd->cmd(CMD_BGCOLOR);
@@ -47,7 +47,7 @@ void FT81xComponentGauge::draw() {
 
 }
 
-void FT81xComponentGauge::draw(const uint16_t value) {
+void FT81xGfxGauge::draw(const uint16_t value) {
   m_value = value;
   draw();
 }

@@ -1,19 +1,19 @@
 #ifndef FT81XCOMPOENENTCLOCK_HEADER_GUARD
 #define FT81XCOMPOENENTCLOCK_HEADER_GUARD
 
-#include "FT81xGuiComponent.h"
+#include "FT81xGfxComponent.h"
 #include "RegisterOperation.h"
 #include "CommandOperation.h"
 
 class FT81xDisplay;
 
 /********************************************/
-/*  FT81xComponentClock Class                    */
+/*  FT81xGfxClock Class                     */
 /********************************************/
 
-class FT81xComponentClock : public FT81xGuiComponent {
+class FT81xGfxClock : public FT81xGfxComponent {
 public:
-  virtual ~FT81xComponentClock();
+  virtual ~FT81xGfxClock();
   virtual void draw();
   void draw(const uint8_t hour, const uint8_t min, const uint8_t sec);
   void setColor(const uint8_t r, const uint8_t g, const uint8_t b) { m_fgcolor = COLOR_RGB(r, g, b); }
@@ -29,7 +29,7 @@ public:
 
 protected:
   friend class FT81xDisplay;
-  FT81xComponentClock(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp);
+  FT81xGfxClock(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp);
 
 private:
   uint16_t m_x;

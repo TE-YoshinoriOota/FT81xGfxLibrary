@@ -1,19 +1,19 @@
 #ifndef FT81XCOMPOENENTGAUGE_HEADER_GUARD
 #define FT81XCOMPOENENTGAUGE_HEADER_GUARD
 
-#include "FT81xGuiComponent.h"
+#include "FT81xGfxComponent.h"
 #include "RegisterOperation.h"
 #include "CommandOperation.h"
 
 class FT81xDisplay;
 
 /********************************************/
-/*  FT81xComponentGauge Class                    */
+/*  FT81xGfxGauge Class                     */
 /********************************************/
 
-class FT81xComponentGauge : public FT81xGuiComponent {
+class FT81xGfxGauge : public FT81xGfxComponent {
 public:
-  virtual ~FT81xComponentGauge();
+  virtual ~FT81xGfxGauge();
   virtual void draw();
   void draw(const uint16_t value);
   void setColor(const uint8_t r, const uint8_t g, const uint8_t b) { m_fgcolor = COLOR_RGB(r, g, b); }
@@ -26,7 +26,7 @@ public:
 
 protected:
   friend class FT81xDisplay;
-  FT81xComponentGauge(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp);
+  FT81xGfxGauge(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp);
 
 private:
   uint16_t m_x;

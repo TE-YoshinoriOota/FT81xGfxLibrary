@@ -1,16 +1,16 @@
-#include "FT81xComponentClock.h"
+#include "FT81xGfxClock.h"
 
 
 /********************************************/
-/*  FT81xComponentClock Class               */
+/*  FT81xGfxClock Class               */
 /********************************************/
 
-FT81xComponentClock::~FT81xComponentClock() {
+FT81xGfxClock::~FT81xGfxClock() {
 
 }
 
-FT81xComponentClock::FT81xComponentClock(RegisterOperation* reg, CommandOperation* cmd, FT81xDisplay *disp)
- : FT81xGuiComponent(reg, cmd, disp) {
+FT81xGfxClock::FT81xGfxClock(RegisterOperation* reg, CommandOperation* cmd, FT81xDisplay *disp)
+ : FT81xGfxComponent(reg, cmd, disp) {
   mType = FT81xClock;
   m_hour = m_min = m_sec = 0;
   m_x = m_y = 0;
@@ -19,7 +19,7 @@ FT81xComponentClock::FT81xComponentClock(RegisterOperation* reg, CommandOperatio
   m_bgcolor = 0;
 }
 
-void FT81xComponentClock::draw() {
+void FT81xGfxClock::draw() {
   myCmd->cmd_start();
   myCmd->cmd(COLOR(m_fgcolor));
   myCmd->cmd(CMD_BGCOLOR);
@@ -32,7 +32,7 @@ void FT81xComponentClock::draw() {
   myCmd->cmd_end();
 }
 
-void FT81xComponentClock::draw(const uint8_t hour, const uint8_t min, const uint8_t sec) {
+void FT81xGfxClock::draw(const uint8_t hour, const uint8_t min, const uint8_t sec) {
   myCmd->cmd_start();
   myCmd->cmd(COLOR(m_fgcolor));
   myCmd->cmd(CMD_BGCOLOR);

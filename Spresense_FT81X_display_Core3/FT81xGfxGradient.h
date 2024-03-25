@@ -11,7 +11,7 @@ class FT81xDisplay;
 /*  FT81xGfxGradient Class                    */
 /********************************************/
 
-class FT81xGfxGradient : public FT81xGuiComponent {
+class FT81xGfxGradient : public FT81xGfxComponent {
 public:
   virtual ~FT81xGfxGradient();
   virtual void draw();

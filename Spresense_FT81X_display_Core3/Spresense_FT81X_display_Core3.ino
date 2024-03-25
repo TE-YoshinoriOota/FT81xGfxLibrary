@@ -3,25 +3,25 @@
 SDClass SD;
 
 #include "FT81xDisplay.h"
-#include "FT81xGuiComponent.h"
+#include "FT81xGfxComponent.h"
 #include "FT81xGfxCircle.h"
 #include "FT81xGfxRectangle.h"
 #include "FT81xGfxTriangle.h"
 #include "FT81xGfxLine.h"
 #include "FT81xGfxGradient.h"
 #include "FT81xGfxText.h"
-#include "FT81xComponentGauge.h"
-#include "FT81xComponentClock.h"
-#include "FT81xComponentProgressbar.h"
-#include "FT81xComponentSpinner.h"
+#include "FT81xGfxGauge.h"
+#include "FT81xGfxClock.h"
+#include "FT81xGfxProgressbar.h"
+#include "FT81xGfxSpinner.h"
 
-#include "FT81xInteractionComponent.h"
-#include "FT81xInteractionButton.h"
-#include "FT81xInteractionKeys.h"
-#include "FT81xInteractionDial.h"
-#include "FT81xInteractionSlider.h"
-#include "FT81xInteractionToggle.h"
-#include "FT81xInteractionScrollbar.h"
+#include "FT81xGuiComponent.h"
+#include "FT81xGuiButton.h"
+#include "FT81xGuiKeys.h"
+#include "FT81xGuiDial.h"
+#include "FT81xGuiSlider.h"
+#include "FT81xGuiToggle.h"
+#include "FT81xGuiScrollbar.h"
 
 #include "FT81xMediaComponent.h"
 #include "FT81xMediaImage.h"
@@ -128,7 +128,7 @@ void setup() {
   text1->draw("OK EVE!!");
 
   // Clock Test
-  FT81xComponentClock* clock = (FT81xComponentClock*)display->Create(FT81xClock);
+  FT81xGfxClock* clock = (FT81xGfxClock*)display->Create(FT81xClock);
   clock->setTime(10, 10, 0);
   clock->setColor(255, 255, 255);
   clock->setBgColor(128, 128, 200);
@@ -137,7 +137,7 @@ void setup() {
   clock->draw();
 
   // Gauge Test
-  FT81xComponentGauge* Gauge = (FT81xComponentGauge*)display->Create(FT81xGauge);
+  FT81xGfxGauge* Gauge = (FT81xGfxGauge*)display->Create(FT81xGauge);
   Gauge->setMeter(6, 4, 60);
   Gauge->setValue(0);
   Gauge->setColor(255, 255, 255);
@@ -148,7 +148,7 @@ void setup() {
   Gauge->draw();
 
   // Progressbar Test
-  FT81xComponentProgressbar* progress = (FT81xComponentProgressbar*)display->Create(FT81xProgressbar);
+  FT81xGfxProgressbar* progress = (FT81xGfxProgressbar*)display->Create(FT81xProgressbar);
   progress->setValue(0);
   progress->setColor(250, 200, 200);
   progress->setBgColor(70, 20, 20);
@@ -210,7 +210,7 @@ void setup() {
   delete Gauge; Gauge = NULL;
 
   // Spinner Test
-  FT81xComponentSpinner* spinner = (FT81xComponentSpinner*)display->Create(FT81xSpinner);
+  FT81xGfxSpinner* spinner = (FT81xGfxSpinner*)display->Create(FT81xSpinner);
   spinner->setColor(200, 200, 200);
   spinner->setPosition(400, 240);
   spinner->setSize(100, 100);
@@ -281,8 +281,8 @@ void setup() {
     display->updateCanvas();
   }
 
-  // Interaction Button Test
-  FT81xInteractionButton *button0 = (FT81xInteractionButton*)display->Create(FT81xButton);
+  // Gui Button Test
+  FT81xGuiButton *button0 = (FT81xGuiButton*)display->Create(FT81xButton);
   button0->setPosition(300, 200);
   button0->setFont(21);
   button0->setSize(100, 50);
@@ -291,7 +291,7 @@ void setup() {
   button0->setText("Button 1");
   button0->setTag(1);
   button0->setCallback(&button_func);
-  FT81xInteractionButton *button1 = (FT81xInteractionButton*)display->Create(FT81xButton);
+  FT81xGuiButton *button1 = (FT81xGuiButton*)display->Create(FT81xButton);
   button1->setPosition(300, 300);
   button1->setFont(21);
   button1->setSize(100, 50);
@@ -306,7 +306,7 @@ void setup() {
   while (num < 10) {
     display->readyCanvas();
     display->clear(255, 255, 255);    
-    display->senseInteractionComponents();
+    display->senseGuiComponents();
     if (button0->pushed()) {
       text1->setText("Button 1 is pushed!");
       ++num;
@@ -326,9 +326,9 @@ void setup() {
   delete button1; button1 = NULL;
 
 
-  // Interaction Keys test
+  // Gui Keys test
   
-  FT81xInteractionKeys *keys = (FT81xInteractionKeys*)display->Create(FT81xKeys);
+  FT81xGuiKeys *keys = (FT81xGuiKeys*)display->Create(FT81xKeys);
   keys->setPosition(300, 200);
   keys->setFont(21);
   keys->setSize(200, 50);
@@ -343,7 +343,7 @@ void setup() {
   while (num < 10) {
     display->readyCanvas();
     display->clear(255, 255, 255);    
-    display->senseInteractionComponents();
+    display->senseGuiComponents();
     char value = keys->readKey();
     if (value != 0) {
       input += value;
@@ -360,17 +360,17 @@ void setup() {
 
   display->setTouchSensitivity(0xffff);
 
-  // Interaction Dial test and Slider test
-  // Interaction Dial
-  FT81xInteractionDial *dial = (FT81xInteractionDial*)display->Create(FT81xDial);
+  // Gui Dial test and Slider test
+  // Gui Dial
+  FT81xGuiDial *dial = (FT81xGuiDial*)display->Create(FT81xDial);
   dial->setPosition(400, 240);
   dial->setSize(50);
   dial->setColor(255,255,255);
   dial->setDialColor(255, 0, 0);
   dial->setCallback(&dial_func);
   dial->setTag(3);
-  // Interaction Slider
-  FT81xInteractionSlider *slider = (FT81xInteractionSlider*)display->Create(FT81xSlider);
+  // Gui Slider
+  FT81xGuiSlider *slider = (FT81xGuiSlider*)display->Create(FT81xSlider);
   slider->setPosition(200, 40);
   slider->setSize(400, 30);
   slider->setColor(0,0,255);
@@ -378,8 +378,8 @@ void setup() {
   slider->setRange(100);
   slider->setCallback(&dial_func);
   slider->setTag(4);
-  // Interaction Toggle
-  FT81xInteractionToggle *toggle = (FT81xInteractionToggle*)display->Create(FT81xToggle);
+  // Gui Toggle
+  FT81xGuiToggle *toggle = (FT81xGuiToggle*)display->Create(FT81xToggle);
   toggle->setFont(28);
   toggle->setPosition(100, 240);
   toggle->setSize(50);
@@ -398,7 +398,7 @@ void setup() {
   uint16_t s_value = 0;
   while (d_value < 90) {
     display->readyCanvas();
-    bool ret = display->senseInteractionComponents();
+    bool ret = display->senseGuiComponents();
     if (ret) {
       d_value = dial->readValue();
       s_value = slider->readValue();
@@ -423,8 +423,8 @@ void setup() {
   delete slider; slider = NULL;
   delete toggle; toggle = NULL;
 
-  // Interaction Scrollbar
-  FT81xInteractionScrollbar *scroll0 = (FT81xInteractionScrollbar*)display->Create(FT81xScrollbar);
+  // Gui Scrollbar
+  FT81xGuiScrollbar *scroll0 = (FT81xGuiScrollbar*)display->Create(FT81xScrollbar);
   scroll0->setPosition(100, 40);
   scroll0->setSize(600, 20);
   scroll0->setBarSize(10);
@@ -434,7 +434,7 @@ void setup() {
   scroll0->setRange(100);
   scroll0->setTag(6);
 
-  FT81xInteractionScrollbar *scroll1 = (FT81xInteractionScrollbar*)display->Create(FT81xScrollbar);
+  FT81xGuiScrollbar *scroll1 = (FT81xGuiScrollbar*)display->Create(FT81xScrollbar);
   scroll1->setPosition(730, 80);
   scroll1->setSize(20, 300);
   scroll1->setBarSize(10);
@@ -454,7 +454,7 @@ void setup() {
   text1->setText("scrollbar values");  
   while (x_value < 100) {
     display->readyCanvas();
-    bool ret = display->senseInteractionComponents();
+    bool ret = display->senseGuiComponents();
     if (ret) {
       x_value = scroll0->readValue();
       y_value = scroll1->readValue();
@@ -738,7 +738,7 @@ void loop() {
 }
 
 
-// interaction functions
+// Gui functions
 void button_func(const uint32_t tag) {
   Serial.println(String(tag) + " Button is pushed!!");
 }

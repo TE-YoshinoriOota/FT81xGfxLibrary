@@ -1,7 +1,7 @@
 #ifndef FT81XGFXTEXT_HEADER_GUARD
 #define FT81XGFXTEXT_HEADER_GUARD
 
-#include "FT81xGuiComponent.h"
+#include "FT81xGfxComponent.h"
 #include "RegisterOperation.h"
 #include "CommandOperation.h"
 //#include "FT81xDisplay.h"
@@ -13,7 +13,7 @@ class FT81xDisplay;
 /*  FT81xGfxText Class                    */
 /********************************************/
 
-class FT81xGfxText : public FT81xGuiComponent {
+class FT81xGfxText : public FT81xGfxComponent {
 public:
   virtual ~FT81xGfxText();
   virtual void draw();

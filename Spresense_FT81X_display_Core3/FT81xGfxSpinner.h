@@ -1,19 +1,19 @@
 #ifndef FT81XCOMPOENENTSPINNER_HEADER_GUARD
 #define FT81XCOMPOENENTSPINNER_HEADER_GUARD
 
-#include "FT81xGuiComponent.h"
+#include "FT81xGfxComponent.h"
 #include "RegisterOperation.h"
 #include "CommandOperation.h"
 #include "FT81xDisplay.h"
 
 
 /********************************************/
-/*  FT81xComponentSpinner Class         */
+/*  FT81xGfxSpinner Class                   */
 /********************************************/
 
-class FT81xComponentSpinner : public FT81xGuiComponent {
+class FT81xGfxSpinner : public FT81xGfxComponent {
 public:
-  virtual ~FT81xComponentSpinner();
+  virtual ~FT81xGfxSpinner();
   virtual void draw();
   void setColor(const uint8_t r, const uint8_t g, const uint8_t b) { m_color = COLOR_RGB(r, g, b); }
   void setPosition(const uint16_t x, const uint16_t y) { m_x = x; m_y = y; }
@@ -25,7 +25,7 @@ public:
 
 protected:
   friend class FT81xDisplay;
-  FT81xComponentSpinner(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp);
+  FT81xGfxSpinner(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp);
 
 private:
   enum spinner_style {

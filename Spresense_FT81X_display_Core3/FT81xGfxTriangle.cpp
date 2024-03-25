@@ -10,7 +10,7 @@ FT81xGfxTriangle::~FT81xGfxTriangle() {
 }
 
 FT81xGfxTriangle::FT81xGfxTriangle(RegisterOperation* reg, CommandOperation* cmd, FT81xDisplay *disp)
- : FT81xGuiComponent(reg, cmd, disp) {
+ : FT81xGfxComponent(reg, cmd, disp) {
   mType = FT81xTriangle;
   m_x1 = m_y1 = 0;
   m_x2 = m_y2 = 0;

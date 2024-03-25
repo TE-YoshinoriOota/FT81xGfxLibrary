@@ -1,19 +1,19 @@
-#include "FT81xInteractionButton.h"
+#include "FT81xGuiButton.h"
 #include "FT81xDisplay.h"
 
 /********************************************/
-/*  FT81xInteractionButton Class            */
+/*  FT81xGuiButton Class            */
 /********************************************/  
 
-FT81xInteractionButton::~FT81xInteractionButton() {
+FT81xGuiButton::~FT81xGuiButton() {
   if (m_text != NULL) {
     delete m_text;
     m_text = NULL;
   }
 }
 
-FT81xInteractionButton::FT81xInteractionButton(RegisterOperation* reg, CommandOperation* cmd, FT81xDisplay *disp)
- : FT81xInteractionComponent(reg, cmd, disp) {
+FT81xGuiButton::FT81xGuiButton(RegisterOperation* reg, CommandOperation* cmd, FT81xDisplay *disp)
+ : FT81xGuiComponent(reg, cmd, disp) {
   m_x = m_y = 0;
   m_w = m_h = 0;
   m_font = 20;
@@ -24,7 +24,7 @@ FT81xInteractionButton::FT81xInteractionButton(RegisterOperation* reg, CommandOp
   m_text = NULL;
 }
 
-void FT81xInteractionButton::draw() {
+void FT81xGuiButton::draw() {
   myCmd->cmd_start();
 
   myCmd->cmd(COLOR(m_color));
@@ -44,7 +44,7 @@ void FT81xInteractionButton::draw() {
   myCmd->cmd_end();
 }
 
-void FT81xInteractionButton::setFont(const uint8_t font) {
+void FT81xGuiButton::setFont(const uint8_t font) {
   if (font > 31) {
     m_font = 31;
   } else {
@@ -52,7 +52,7 @@ void FT81xInteractionButton::setFont(const uint8_t font) {
   }
 }
 
-void FT81xInteractionButton::setText(const char text[]) {
+void FT81xGuiButton::setText(const char text[]) {
   static const char str_null[] = "null";
   uint16_t length = strlen(text);
   //Serial.println("m_textSize: " + String(m_textSize));
@@ -70,14 +70,14 @@ void FT81xInteractionButton::setText(const char text[]) {
   }
 }
 
-void FT81xInteractionButton::doInteraction_(const uint32_t tag) {
+void FT81xGuiButton::doInteraction_(const uint32_t tag) {
   m_pushed = true;
   if (m_func != NULL) {
     m_func(tag);
   }
 }
 
-bool FT81xInteractionButton::pushed() {
+bool FT81xGuiButton::pushed() {
   bool value = m_pushed;
   m_pushed = false; // once the value is read, reset the value;
   return value; 

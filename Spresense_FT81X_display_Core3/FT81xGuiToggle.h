@@ -1,7 +1,7 @@
 #ifndef FT81XINTERACTIONTOGGLE_HEADER_GUARD
 #define FT81XINTERACTIONTOGGLE_HEADER_GUARD
 
-#include "FT81xInteractionComponent.h"
+#include "FT81xGuiComponent.h"
 #include "RegisterOperation.h"
 #include "CommandOperation.h"
 
@@ -10,12 +10,12 @@ class FT81xDisplay;
 
 
 /********************************************/
-/*  FT81xInteractionToggle Class            */
+/*  FT81xGuiToggle Class                    */
 /********************************************/  
 
-class FT81xInteractionToggle : public FT81xInteractionComponent {
+class FT81xGuiToggle : public FT81xGuiComponent {
 public:
-  virtual ~FT81xInteractionToggle();
+  virtual ~FT81xGuiToggle();
   virtual void draw();
   void setFont(const uint8_t font);
   void setColor(const uint8_t r, const uint8_t g, const uint8_t b) { m_color = COLOR_RGB(r, g, b); }
@@ -27,7 +27,7 @@ public:
 
 protected:
   friend class FT81xDisplay;
-  FT81xInteractionToggle(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp);
+  FT81xGuiToggle(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp);
   virtual void doInteraction_(const uint32_t value);
   virtual bool isTracker() { return true; }
   

@@ -1,7 +1,7 @@
 #ifndef FT81XGFXCIRCLE_HEADER_GUARD
 #define FT81XGFXCIRCLE_HEADER_GUARD
 
-#include "FT81xGuiComponent.h"
+#include "FT81xGfxComponent.h"
 #include "RegisterOperation.h"
 #include "CommandOperation.h"
 
@@ -11,7 +11,7 @@ class FT81xDisplay;
 /*  FT81xGfxCircle Class                    */
 /********************************************/
 
-class FT81xGfxCircle : public FT81xGuiComponent {
+class FT81xGfxCircle : public FT81xGfxComponent {
 public:
   virtual ~FT81xGfxCircle();
   virtual void draw();

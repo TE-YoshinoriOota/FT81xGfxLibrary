@@ -1,20 +1,20 @@
-#include "FT81xInteractionToggle.h"
+#include "FT81xGuiToggle.h"
 #include "FT81xDisplay.h"
 
 
 /********************************************/
-/*  FT81xInteractionToggle Class            */
+/*  FT81xGuiToggle Class            */
 /********************************************/  
 
-FT81xInteractionToggle::~FT81xInteractionToggle() {
+FT81xGuiToggle::~FT81xGuiToggle() {
   if (m_text != NULL) {
     delete m_text;
     m_text = NULL;
   }
 }
 
-FT81xInteractionToggle::FT81xInteractionToggle(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp)
- : FT81xInteractionComponent(reg, cmd, disp) {
+FT81xGuiToggle::FT81xGuiToggle(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp)
+ : FT81xGuiComponent(reg, cmd, disp) {
   m_x = m_y = 0;
   m_w = 0;
   m_font = 20;
@@ -25,7 +25,7 @@ FT81xInteractionToggle::FT81xInteractionToggle(RegisterOperation *reg, CommandOp
   m_text = NULL;
 }
 
-void FT81xInteractionToggle::setFont(const uint8_t font) {
+void FT81xGuiToggle::setFont(const uint8_t font) {
   if (font > 31) {
     m_font = 31;
   } else {
@@ -33,7 +33,7 @@ void FT81xInteractionToggle::setFont(const uint8_t font) {
   }
 }
 
-void FT81xInteractionToggle::setText(const char text0[], const char text1[]) {
+void FT81xGuiToggle::setText(const char text0[], const char text1[]) {
   static const char str_null[] = "Y\xffN";
   String text = String(text0) + String("\xff") + String(text1);
   uint16_t length = strlen(text.c_str());
@@ -53,7 +53,7 @@ void FT81xInteractionToggle::setText(const char text0[], const char text1[]) {
 }
 
 
-void FT81xInteractionToggle::draw() {
+void FT81xGuiToggle::draw() {
   myCmd->cmd_start();
   myCmd->cmd(TAG_MASK(1));
   myCmd->cmd(TAG(mTag));
@@ -78,7 +78,7 @@ void FT81xInteractionToggle::draw() {
   myCmd->cmd_end();
 }
 
-void FT81xInteractionToggle::doInteraction_(const uint32_t value) {
+void FT81xGuiToggle::doInteraction_(const uint32_t value) {
   static bool state = false;
   state = state ? false : true; 
   if (state) m_state = 0xffff;

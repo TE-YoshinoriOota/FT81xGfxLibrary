@@ -10,7 +10,7 @@ FT81xGfxRectangle::~FT81xGfxRectangle() {
 }
 
 FT81xGfxRectangle::FT81xGfxRectangle(RegisterOperation* reg, CommandOperation* cmd, FT81xDisplay *disp)
- : FT81xGuiComponent(reg, cmd, disp) {
+ : FT81xGfxComponent(reg, cmd, disp) {
   mType = FT81xRectangle;
   m_x = m_y = 0;
   m_w = m_h = 0;

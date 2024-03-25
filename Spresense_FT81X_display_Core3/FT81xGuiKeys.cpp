@@ -1,11 +1,11 @@
-#include "FT81xInteractionKeys.h"
+#include "FT81xGuiKeys.h"
 #include "FT81xDisplay.h"
 
 /********************************************/
-/*  FT81xInteractionKeys Class            */
+/*  FT81xGuiKeys Class                      */
 /********************************************/  
 
-FT81xInteractionKeys::~FT81xInteractionKeys() {
+FT81xGuiKeys::~FT81xGuiKeys() {
   if (m_keymap != NULL) {
     uint16_t length = strlen(m_keymap);
     for (int n = 0; n < length; ++n) {
@@ -16,8 +16,8 @@ FT81xInteractionKeys::~FT81xInteractionKeys() {
   }
 }
 
-FT81xInteractionKeys::FT81xInteractionKeys(RegisterOperation* reg, CommandOperation* cmd, FT81xDisplay *disp)
- : FT81xInteractionComponent(reg, cmd, disp) {
+FT81xGuiKeys::FT81xGuiKeys(RegisterOperation* reg, CommandOperation* cmd, FT81xDisplay *disp)
+ : FT81xGuiComponent(reg, cmd, disp) {
   m_x = m_y = 0;
   m_w = m_h = 0;
   m_font = 20;
@@ -29,7 +29,7 @@ FT81xInteractionKeys::FT81xInteractionKeys(RegisterOperation* reg, CommandOperat
   m_func = NULL;
 }
 
-void FT81xInteractionKeys::draw() {
+void FT81xGuiKeys::draw() {
   myCmd->cmd_start();
   myCmd->cmd(COLOR(m_color));
   myCmd->cmd(CMD_FGCOLOR);
@@ -43,7 +43,7 @@ void FT81xInteractionKeys::draw() {
   myCmd->cmd_end();
 }
 
-void FT81xInteractionKeys::setFont(const uint8_t font) {
+void FT81xGuiKeys::setFont(const uint8_t font) {
   if (font > 31) {
     m_font = 31;
   } else {
@@ -51,7 +51,7 @@ void FT81xInteractionKeys::setFont(const uint8_t font) {
   }
 }
 
-void FT81xInteractionKeys::setKeyMap(const char keymap[]) {
+void FT81xGuiKeys::setKeyMap(const char keymap[]) {
   static const char str_null[] = "-";
   uint16_t length = strlen(keymap) + 1;
   //Serial.println("m_textSize: " + String(m_textSize));
@@ -72,7 +72,7 @@ void FT81xInteractionKeys::setKeyMap(const char keymap[]) {
   }
 }
 
-void FT81xInteractionKeys::doInteraction_(const uint32_t tag) {
+void FT81xGuiKeys::doInteraction_(const uint32_t tag) {
   m_key = (char)tag;
   Serial.println("Keys::doInteruction_ is called");
   if (m_func != NULL) {
@@ -80,7 +80,7 @@ void FT81xInteractionKeys::doInteraction_(const uint32_t tag) {
   }
 }
 
-char FT81xInteractionKeys::readKey() {
+char FT81xGuiKeys::readKey() {
   char value = m_key;
   m_key = 0;
   return value;

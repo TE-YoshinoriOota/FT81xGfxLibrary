@@ -1,7 +1,7 @@
 #ifndef FT81XGFXTRIANGLE_HEADER_GUARD
 #define FT81XGFXTRIANGLE_HEADER_GUARD
 
-#include "FT81xGuiComponent.h"
+#include "FT81xGfxComponent.h"
 #include "RegisterOperation.h"
 #include "CommandOperation.h"
 
@@ -11,7 +11,7 @@ class FT81xDisplay;
 /*  FT81xGfxTriangle Class                  */
 /********************************************/
 
-class FT81xGfxTriangle : public FT81xGuiComponent {
+class FT81xGfxTriangle : public FT81xGfxComponent {
 public:
   virtual ~FT81xGfxTriangle();
   virtual void draw();

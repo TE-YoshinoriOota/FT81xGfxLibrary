@@ -9,7 +9,7 @@ FT81xGfxLine::~FT81xGfxLine() {
 }
 
 FT81xGfxLine::FT81xGfxLine(RegisterOperation* reg, CommandOperation* cmd, FT81xDisplay *disp)
- : FT81xGuiComponent(reg, cmd, disp) {
+ : FT81xGfxComponent(reg, cmd, disp) {
   mType = FT81xLine;
   m_x1 = m_y1 = 0;
   m_x2 = m_y2 = 0;

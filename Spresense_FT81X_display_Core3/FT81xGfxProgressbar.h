@@ -1,19 +1,19 @@
 #ifndef FT81XCOMPONENTPROGRESSBAR_HEADER_GUARD
 #define FT81XCOMPONENTPROGRESSBAR_HEADER_GUARD
 
-#include "FT81xGuiComponent.h"
+#include "FT81xGfxComponent.h"
 #include "RegisterOperation.h"
 #include "CommandOperation.h"
 
 class FT81xDisplay;
 
 /********************************************/
-/*  FT81xComponentProgressbar Class         */
+/*  FT81xGfxProgressbar Class         */
 /********************************************/
 
-class FT81xComponentProgressbar : public FT81xGuiComponent {
+class FT81xGfxProgressbar : public FT81xGfxComponent {
 public:
-  virtual ~FT81xComponentProgressbar();
+  virtual ~FT81xGfxProgressbar();
   virtual void draw();
   void draw(const uint16_t value);
   void setColor(const uint8_t r, const uint8_t g, const uint8_t b) { m_fgcolor = COLOR_RGB(r, g, b); }
@@ -25,7 +25,7 @@ public:
 
 protected:
   friend class FT81xDisplay;
-  FT81xComponentProgressbar(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp);
+  FT81xGfxProgressbar(RegisterOperation *reg, CommandOperation *cmd, FT81xDisplay *disp);
 
 private:
   uint16_t m_x;
