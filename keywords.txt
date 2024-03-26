@@ -1,0 +1,201 @@
+#########################################
+# Syntax Coloring Map for FT81xGfxLib   #
+#########################################
+# Class
+#########################################
+
+RegisterOperation	KEYWORD1
+CommandOperation	KEYWORD1
+MemoryOperation		KEYWORD1
+MediaOperation		KEYWORD1
+
+FT81xDisplay		KEYWORD1
+
+FT81xComponents		KEYWORD1
+FT81xComponent		KEYWORD1
+FT81xGfxComponent	KEYWORD1
+FT81xGuiComponent	KEYWORD1
+FT81xMediaComponent	KEYWORD1
+
+FT81xGfxCircle		KEYWORD1
+FT81xGfxRectangle	KEYWORD1
+FT81xGfxTriangle	KEYWORD1
+FT81xGfxLine		KEYWORD1
+FT81xGfxGradient	KEYWORD1
+FT81xGfxClock		KEYWORD1
+FT81xGfxGauge		KEYWORD1
+FT81xGfxSpinner		KEYWORD1
+FT81xGfxProgressbar	KEYWORD1
+FT81xGfxText		KEYWORD1
+
+FT81xGuiButton		KEYWORD1
+FT81xGuiDial		KEYWORD1
+FT81xGuiKeys		KEYWORD1
+FT81xGuiScrollbar	KEYWORD1
+FT81xGuiSlider		KEYWORD1
+FT81xGuiToggle		KEYWORD1
+
+FT81xMediaAudio		KEYWORD1
+FT81xMediaSync		KEYWORD1
+FT81xMediaImage		KEYWORD1
+FT81xMediaMovie		KEYWORD1
+
+
+
+#########################################
+# Methods and Functions
+#########################################
+
+type		       	KEYWORD2
+getId		        KEYWORD2
+__send_text_helper_	KEYWORD2
+
+Instance		KEYWORD2
+begin			KEYWORD2
+readyCanvas		KEYWORD2
+clear			KEYWORD2
+senseGuiComponents	KEYWORD2
+updateCanvas		KEYWORD2
+swap			KEYWORD2
+getDisplayWidth		KEYWORD2
+getDisplayHeight	KEYWORD2
+getBgColor		KEYWORD2
+Create			KEYWORD2
+Destroy			KEYWORD2
+doTouchCalibration	KEYWORD2
+isTouchCalibration	KEYWORD2
+forceTouchCalibration	KEYWORD2
+removeTouchCalibration	KEYWORD2
+isTouched		KEYWORD2
+setTouchSensitivity	KEYWORD2
+addGfxComponent		KEYWORD2
+releaseGfxComponent	KEYWORD2
+setTag			KEYWORD2
+releaseTag		KEYWORD2
+
+draw			KEYWORD2
+setVisible		KEYWORD2
+setVisible		KEYWORD2
+
+setPosition		KEYWORD2
+setColor		KEYWORD2
+setBgColor		KEYWORD2
+setSize			KEYWORD2
+setRange		KEYWORD2
+setValue
+
+setFont			KEYWORD2
+setText			KEYWORD2
+
+setCorner		KEYWORD2
+setPoints		KEYWORD2
+setWidth		KEYWORD2
+
+setTime			KEYWORD2
+setNo3dEffect		KEYWORD2
+setNoSeconds		KEYWORD2
+setNoBackground		KEYWORD2
+setNoTicks		KEYWORD2
+setNoHands		KEYWORD2
+
+setNeedleColor		KEYWORD2
+setMeter		KEYWORD2
+
+setStartColor		KEYWORD2
+setEndColor		KEYWORD2
+
+setCircleStyle		KEYWORD2
+setLineStyle		KEYWORD2
+setClockStyle		KEYWORD2
+setDotStyle		KEYWORD2
+
+setCallback		KEYWORD2
+getTag			KEYWORD2
+setTag			KEYWORD2
+releaseTag		KEYWORD2
+
+doInteraction_		KEYWORD2
+isTracker		KEYWORD2
+
+setButtonColor		KEYWORD2
+setDialColor		KEYWORD2
+readValue		KEYWORD2
+
+setKeyMap		KEYWORD2
+readKey			KEYWORD2
+
+setScrollbarColor	KEYWORD2
+setBarSize		KEYWORD2
+setSliderColor		KEYWORD2
+setToggleColor		KEYWORD2
+readState		KEYWORD2
+
+setupMemory		KEYWORD2
+play			KEYWORD2
+stop			KEYWORD2
+setAudio		KEYWORD2
+setFormat		KEYWORD2
+setSamplingRate		KEYWORD2
+setVolume		KEYWORD2
+setLoop			KEYWORD2
+
+
+setupMemory		KEYWORD2
+getChunkSize		KEYWORD2
+getTransBuf		KEYWORD2
+
+setImage		KEYWORD2
+setScale		KEYWORD2
+setRotation		KEYWORD2
+
+setMovie		KEYWORD2
+setFullscreen		KEYWORD2
+enableSound		KEYWORD2
+
+setNote			KEYWORD2
+setEffect		KEYWORD2
+isContinuous		KEYWORD2
+
+setupMediaFifo		KEYWORD2
+setupPlaybackMemory	KEYWORD2
+writeMediaFifo		KEYWORD2
+resetMediaFifo		KEYWORD2
+writePlaybackMemory	KEYWORD2
+resetPlaybackMemory	KEYWORD2
+getMediaFifoSize	KEYWORD2
+getMediaFifoWriteAddress	KEYWORD2
+getMediaFifoReadAddress		KEYWORD2
+getPlaybackWriteAddress		KEYWORD2
+getPlaybackReadAddress		KEYWORD2
+isMediaFifo		KEYWORD2
+memWrite		KEYWORD2
+
+rd8			KEYWORD2
+rd16			KEYWORD2
+rd32			KEYWORD2
+wr8			KEYWORD2
+wr16			KEYWORD2
+wr32
+host_command		KEYWORD2
+
+cmd_start		KEYWORD2
+cmd			KEYWORD2
+cmd_end			KEYWORD2
+waitForCmdFiFoEmpty	KEYWORD2
+checkCmdFiFoBuffer	KEYWORD2
+checkCmdFiFoFreespace	KEYWORD2
+waitCmdFiFoFreespace	KEYWORD2
+incCmdWriteAddress	KEYWORD2
+updateCmdWriteAddress	KEYWORD2
+
+
+
+
+
+
+
+
+
+
+
+
